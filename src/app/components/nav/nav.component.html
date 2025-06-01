@@ -5,11 +5,11 @@
   </div>
    
   
-  <ul class="nav-links">
-    <li><a [routerLink]="['/index']">Inicio</a></li>
-    <li><a [routerLink]="['/servicios']">Servicios</a></li>
-    <li><a [routerLink]="['/contacto']">Contacto</a></li>
-    <li><a [routerLink]="['/horarios']">Horarios</a></li>
+  <ul class="nav-links mt-3">
+    <li><a [routerLink]="['/index']">{{"inicio" | uppercase}}</a></li>
+    <li><a [routerLink]="['/servicios']">{{"servicios" | uppercase}}</a></li>
+    <li><a [routerLink]="['/contacto']">{{"contacto" | uppercase}}</a></li>
+    <li><a [routerLink]="['/horarios']">{{"horarios" | uppercase}}</a></li>
   </ul>
   
   <div class="user-section">
@@ -18,7 +18,7 @@
       <div class="user-info">
         <span class="user-name">{{ currentUser.fullName }}</span>
         <img src="user.png" alt="Usuario" class="user-avatar">
-        <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+        <button (click)="logout()" class="logout-btn">{{"cerrar sesión" | uppercase}}</button>
       </div>
     }
     @else

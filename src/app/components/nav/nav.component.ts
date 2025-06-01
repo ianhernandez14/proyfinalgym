@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { UpperCasePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-nav',
-  imports: [RouterModule],
+  imports: [RouterModule, UpperCasePipe],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
