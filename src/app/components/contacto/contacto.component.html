@@ -13,18 +13,22 @@
   </div>
 
   <!-- Formulario de contacto -->
-  <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="contact-form mb-5">
+  <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)" class="contact-form mb-5">
     <h2 class="display-5 my-4 text-center">Contáctanos</h2>
+
     <div class="mb-4">
       <label for="nombre" class="form-label fs-4">Nombre</label>
       <input
         type="text"
         id="nombre"
+        name="nombre"
         class="form-control form-control-lg"
-        formControlName="nombre"
+        [(ngModel)]="contacto.nombre"
         required
+        #nombre="ngModel"
       >
-      @if (contactoForm.get('nombre')?.touched && contactoForm.get('nombre')?.invalid) {
+      @if (nombre.touched && nombre.invalid)
+      {
         <div class="text-danger mt-1 fs-5">El nombre es obligatorio.</div>
       }
     </div>
@@ -34,11 +38,15 @@
       <input
         type="email"
         id="email"
+        name="email"
         class="form-control form-control-lg"
-        formControlName="email"
+        [(ngModel)]="contacto.email"
         required
+        email
+        #email="ngModel"
       >
-      @if (contactoForm.get('email')?.touched && contactoForm.get('email')?.invalid) {
+      @if (email.touched && email.invalid)
+      {
         <div class="text-danger mt-1 fs-5">Ingresa un correo válido.</div>
       }
     </div>
@@ -47,25 +55,31 @@
       <label for="mensaje" class="form-label fs-4">Mensaje</label>
       <textarea
         id="mensaje"
+        name="mensaje"
         class="form-control form-control-lg"
         rows="5"
-        formControlName="mensaje"
+        [(ngModel)]="contacto.mensaje"
         required
+        #mensaje="ngModel"
       ></textarea>
-      @if (contactoForm.get('mensaje')?.touched && contactoForm.get('mensaje')?.invalid) {
+      @if (mensaje.touched && mensaje.invalid)
+      {
         <div class="text-danger mt-1 fs-5">El mensaje es obligatorio.</div>
       }
     </div>
 
     <div class="text-center">
-      <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fs-4" [disabled]="contactoForm.invalid">Enviar</button>
+      <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fs-4" [disabled]="formulario.invalid">Enviar</button>
     </div>
-    @if (formEnviado) {
+
+    @if (formEnviado)
+    {
       <div class="alert alert-success mt-4 fs-4 text-center" role="alert">
         ¡Gracias por tu mensaje! Te contactaremos pronto.
       </div>
     }
   </form>
+
 @if (currentUser) {
   @if (mensajes.length > 0) {
     <section class="mensajes-section my-5">

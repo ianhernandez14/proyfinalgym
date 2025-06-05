@@ -17,7 +17,7 @@ export interface Entrenador{
 })
 export class EntrenadoresService {
 
-  private apiUrl = 'https://infoentrenadores.free.beeceptor.com';
+  private apiUrl = 'https://infoentrenadores3.free.beeceptor.com/';
 
   constructor(private http: HttpClient) { }
 
