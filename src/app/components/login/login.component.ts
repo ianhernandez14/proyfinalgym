@@ -3,6 +3,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
   errorMessage: string = '';
   showWelcomeMessage: boolean = false;
@@ -20,39 +21,31 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit()
-  {
-    const user = this.authService.login(this.username, this.password);
+  onSubmit() {
+    this.authService.login(this.email, this.password).subscribe((user: User | null) => {
+      if (user) {
+        this.welcomeName = user.nombre_completo;
+        this.showWelcomeMessage = true;
+        this.errorMessage = '';
 
-    if (user)
-    {
-      this.welcomeName = user.fullName;
-      this.showWelcomeMessage = true;
-      this.errorMessage = '';
-
-      setTimeout(() => {
+        setTimeout(() => {
+          this.showWelcomeMessage = false;
+          // Redirige a /index y recarga la página
+          this.router.navigateByUrl('/index').then(() => {
+            window.location.reload();
+          });
+        }, 3000);
+      } else {
+        this.errorMessage = 'Usuario o contraseña incorrectos';
         this.showWelcomeMessage = false;
-
-        // Redirige a /index y recarga la página
-        this.router.navigateByUrl('/index').then(() => {
-          window.location.reload();
-        });
-      }, 3000);
-    }
-    else
-    {
-      this.errorMessage = 'Usuario o contraseña incorrectos';
-      this.showWelcomeMessage = false;
-    }
+      }
+    });
   }
 
-  closeWelcomeMessage()
-  {
+  closeWelcomeMessage() {
     this.showWelcomeMessage = false;
-
     // Redirige a /index y recarga la página
     this.router.navigateByUrl('/index').then(() => {
-      //Recargar y redirigir al home para que se actualice el nav y mostrar el nombre del admin
       window.location.reload();
     });
   }

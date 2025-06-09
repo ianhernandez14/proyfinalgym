@@ -1,36 +1,42 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 // Define la interfaz User (asegúrate de tenerla en tu proyecto)
 interface User {
-  username: string;
+  id?: string;
+  email: string;
   password: string;
-  fullName: string;
+  nombre_completo: string;
+  tipo_usuario: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private registeredUsers: User[] = [
-    { username: 'josimar', password: '123', fullName: 'Josimar Maldonado Rosales' },
-    { username: 'ian', password: '456', fullName: 'Ian Hernandez Aranda' },
-    { username: 'gustavo', password: '789', fullName: 'Gustavo Mojica Lamas' }
-  ];
-
+export class AuthService
+{
+  private apiUrl = 'http://localhost:3000/api/usuarios';
   private currentUser: User | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string): User | null {
-    // Especifica el tipo del parámetro 'u' como User
-    const user = this.registeredUsers.find((u: User) => u.username === username && u.password === password);
-    if (user) {
-      this.currentUser = user;
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return user;
-    }
-    return null;
+  login(email: string, password: string): Observable<User | null>
+  {
+    return this.http.get<User[]>(`${this.apiUrl}?email=${email}`).pipe(
+      map(users => {
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+          this.currentUser = user;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          return user;
+        }
+        return null;
+      }),
+      catchError(() => of(null))
+    );
   }
 
   logout() {
@@ -45,5 +51,10 @@ export class AuthService {
       this.currentUser = user ? JSON.parse(user) : null;
     }
     return this.currentUser;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.tipo_usuario === 'admin';
   }
 }

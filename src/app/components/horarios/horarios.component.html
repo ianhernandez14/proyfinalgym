@@ -168,8 +168,9 @@
 
 
 
-@if (currentUser) {
-  @if (inscripcionesUsuario.length > 0) {
+@if(esAdmin)
+{
+  @if(inscripcionesUsuario.length > 0) {
     <section class="container mt-5">
       <div class="card shadow-lg border-0 bg-dark text-light">
         <div class="card-header bg-primary text-white">
@@ -220,7 +221,7 @@
     </section>
   } @else {
     <section class="container mt-5">
-      <div class="alert alert-info text-center shadow-sm py-4 fs-5" role="alert" style="background: #23272b; color: #fff;">
+      <div class="alert alert-info text-center shadow-sm py-4 fs-5 mb-0" role="alert" style="background: #23272b; color: #fff;">
         <i class="bi bi-info-circle-fill me-2"></i>
         No hay inscripciones registradas.
       </div>

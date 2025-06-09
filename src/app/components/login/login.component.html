@@ -12,24 +12,17 @@
     </div>
   }
 
-  <div class="form-box">
+  <div class="form-box d-block">
     <h2>Iniciar Sesión</h2>
-    
-    @if (errorMessage)
-    {
-      <div class="error-message">
-        {{ errorMessage }}
-      </div>
-    }
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="input-group">
         <label>Usuario</label>
         <input 
           type="text" 
-          [(ngModel)]="username" 
-          name="username"
-          placeholder="Ingrese su usuario"
+          [(ngModel)]="email" 
+          name="email"
+          placeholder="Ingrese su correo"
           required>
       </div>
 
@@ -42,6 +35,13 @@
           placeholder="Ingrese su contraseña"
           required>
       </div>
+
+      @if (errorMessage)
+      {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
 
       <button type="submit" [disabled]="!loginForm.valid">
         Ingresar

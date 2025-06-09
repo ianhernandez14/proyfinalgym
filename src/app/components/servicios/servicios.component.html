@@ -42,11 +42,11 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
    @for (entrenador of entrenadoresFiltrados; track entrenador.nombre) {
   <div class="col d-flex">
-  <mat-card
-  class="h-100 w-100 bg-dark text-light shadow entrenador-card"
-  [ngClass]="{'entrenador-seleccionado': selectedEntrenadorId === entrenador.id}"
-  (click)="seleccionarEntrenador(entrenador.id)"
->
+    <mat-card
+      class="h-100 w-100 bg-dark text-light shadow entrenador-card"
+      [ngClass]="{'entrenador-seleccionado': selectedEntrenadorId === entrenador.id}"
+      (click)="seleccionarEntrenador(entrenador.id)"
+    >
       <img mat-card-image [src]="entrenador.image" [alt]="entrenador.nombre" class="mx-auto mt-3 rounded-circle" style="max-width:160px;">
       <mat-card-content>
         <h5 class="text-primary text-center mt-3">{{ entrenador.nombre }}</h5>
@@ -54,12 +54,7 @@
         <p class="text-center mb-1"><strong>Edad:</strong> {{ entrenador.edad }}</p>
         <p class="text-center mb-1"><strong>Especialidad:</strong> {{ entrenador.especialidad }}</p>
       </mat-card-content>
-      <mat-card-actions class="justify-content-center">
-        <a mat-raised-button color="primary" [routerLink]="['/servicios', entrenador.id]">
-          <mat-icon>info</mat-icon>
-          Ver detalle
-        </a>
-      </mat-card-actions>
+      
     </mat-card>
   </div>
 }

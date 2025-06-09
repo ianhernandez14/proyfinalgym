@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { UpperCasePipe } from '@angular/common';
 
-
 @Component({
   selector: 'app-nav',
   imports: [RouterModule, UpperCasePipe],
@@ -12,7 +11,7 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class NavComponent {
   logoPath: string = 'logo2.png'; 
-   currentUser: any = null;
+  currentUser: any = null;
 
   constructor(private authService: AuthService) {}
 

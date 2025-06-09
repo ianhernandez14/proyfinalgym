@@ -20,9 +20,10 @@ export class HorariosComponent {
   formEnviado = false;
   mostrarAlerta = false;
   inscripcionesUsuario: any[] = [];
-    currentUser: any = null;
+  currentUser: any = null;
+  esAdmin: boolean = false;
 
-     actividades = [
+  actividades = [
     { imagen: 'boxeo.jpg', titulo: 'Boxeo', horario: 'De lunes a domingo: 5 pm - 10 pm' },
     { imagen: 'mma.jpg', titulo: 'MMA', horario: 'De lunes a viernes: 3 pm - 7 pm' },
     { imagen: 'zumba.jpg', titulo: 'Zumba', horario: 'De viernes a domingo: 7 am - 2 pm' },
@@ -32,7 +33,9 @@ export class HorariosComponent {
 constructor(private fb: FormBuilder, private authService: AuthService,private snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.currentUser = this.authService.getCurrentUser(); // <-- Agrega esta línea
+    this.currentUser = this.authService.getCurrentUser();
+    this.esAdmin = this.currentUser?.tipo_usuario === "admin";
+    console.log(this.esAdmin);
     this.generateMonths();
     
     this.horarioForm = this.fb.group({
@@ -49,7 +52,7 @@ constructor(private fb: FormBuilder, private authService: AuthService,private sn
     this.cargarInscripcionesUsuario();
   }
 
-     // Validador mejorado para fechas
+     
   fechaNoPasadaValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) {
       return null;
@@ -147,13 +150,14 @@ editarInscripcion(inscripcion: any): void {
     return;
   }
 
-  const currentUser = this.authService.getCurrentUser();
+  
+  
   const inscripcion = {
     id: this.editandoId ? this.editandoId : Date.now(),
     ...this.horarioForm.value,
     fechaInscripcion: new Date().toISOString(),
     year: this.currentYear,
-    username: currentUser ? currentUser.username : null
+    username: this.currentUser ? this.currentUser.nombre_completo : null
   };
 
   const inscripcionesStorage = localStorage.getItem('inscripciones');
@@ -180,14 +184,11 @@ editarInscripcion(inscripcion: any): void {
 
 }
 
-
-
  cargarInscripcionesUsuario(): void {
   const inscripcionesStorage = localStorage.getItem('inscripciones');
   this.inscripcionesUsuario = inscripcionesStorage ? JSON.parse(inscripcionesStorage) : [];
 }
   
-
   getCurrentDate(): string {
   const hoy = new Date();
   const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');

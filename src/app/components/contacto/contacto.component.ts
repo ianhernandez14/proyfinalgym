@@ -25,6 +25,7 @@ export class ContactoComponent{
   mensajes: any[] = [];
   currentUser: any = null;
   editandoId: number | null = null;
+  esAdmin: boolean = false;
 
   equipo = [
     {
@@ -49,6 +50,7 @@ export class ContactoComponent{
   ngOnInit(): void
   {
     this.currentUser = this.authService.getCurrentUser();
+    this.esAdmin = this.currentUser?.tipo_usuario === "admin";
     this.cargarMensajes();
   }
 
