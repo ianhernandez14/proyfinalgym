@@ -5,11 +5,13 @@ import { AuthService } from '../../auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContactoService } from '../../services/contacto.service';
+import { Mensaje } from '../../services/contacto.service';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule,FormsModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.css']
 })
@@ -26,6 +28,7 @@ export class ContactoComponent{
   currentUser: any = null;
   editandoId: number | null = null;
   esAdmin: boolean = false;
+  estaLogueado: boolean = false;
 
   equipo = [
     {
@@ -45,47 +48,52 @@ export class ContactoComponent{
     }
   ];
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
+  constructor(
+  private authService: AuthService,
+  private snackBar: MatSnackBar,
+  private contactoService: ContactoService
+) {}
 
   ngOnInit(): void
   {
     this.currentUser = this.authService.getCurrentUser();
+    // Verificar si hay usuario en localStorage
+    const userInStorage = localStorage.getItem('currentUser');
+    this.estaLogueado = !!userInStorage && !!this.currentUser;
+
     this.esAdmin = this.currentUser?.tipo_usuario === "admin";
-    this.cargarMensajes();
+
+    if (this.estaLogueado) {
+      this.cargarMensajes();
+    }
   }
 
-  onSubmit(formulario: any): void
-  {
-    if (formulario.invalid) return;
+  onSubmit(formulario: any): void {
+  if (formulario.invalid) return;
 
-    const mensaje = {
-      id: this.editandoId ? this.editandoId : Date.now(),
-      ...this.contacto,
-      fecha: new Date().toISOString(),
-      username: this.currentUser ? this.currentUser.username : null
-    };
+  const mensaje: Mensaje = {
+    ...this.contacto,
+    fecha: new Date().toISOString(),
+    username: this.currentUser ? this.currentUser.username : undefined
+  };
 
-    const mensajesStorage = localStorage.getItem('mensajesContacto');
-    let mensajes = mensajesStorage ? JSON.parse(mensajesStorage) : [];
-
-    if (this.editandoId)
-    {
-      mensajes = mensajes.map((m: any) => m.id === this.editandoId ? mensaje : m);
+  if (this.editandoId) {
+    this.contactoService.actualizarMensaje(this.editandoId, mensaje).subscribe(() => {
       this.editandoId = null;
-    }
-    else
-    {
-      mensajes.push(mensaje);
-    }
-
-    localStorage.setItem('mensajesContacto', JSON.stringify(mensajes));
-
+      this.resetFormulario(formulario);
+    });
+  } else {
+    this.contactoService.crearMensaje(mensaje).subscribe(() => {
+      this.resetFormulario(formulario);
+    });
+  }
+}
+  resetFormulario(formulario: any): void {
     formulario.resetForm();
     this.cargarMensajes();
 
     this.formEnviado = true;
-    setTimeout(() =>
-    {
+    setTimeout(() => {
       this.formEnviado = false;
     }, 3000);
 
@@ -95,18 +103,22 @@ export class ContactoComponent{
     });
   }
 
-  cargarMensajes(): void
-  {
-    const mensajesStorage = localStorage.getItem('mensajesContacto');
-    this.mensajes = mensajesStorage ? JSON.parse(mensajesStorage) : [];
+
+cargarMensajes(): void {
+  if (this.esAdmin) {
+    this.contactoService.obtenerMensajes().subscribe((mensajes) => {
+      this.mensajes = mensajes;
+    });
+  }
+}
+
+
+  eliminarMensaje(id: number): void {
+    this.contactoService.eliminarMensaje(id).subscribe(() => {
+      this.cargarMensajes();
+    });
   }
 
-  eliminarMensaje(id: number): void
-  {
-    let mensajes = this.mensajes.filter((m: any) => m.id !== id);
-    localStorage.setItem('mensajesContacto', JSON.stringify(mensajes));
-    this.cargarMensajes();
-  }
 
   editarMensaje(mensaje: any): void
   {

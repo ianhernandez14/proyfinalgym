@@ -12,6 +12,18 @@
     }
   </div>
 
+    <!-- Mensaje para usuarios no autenticados -->
+  @if (!estaLogueado) {
+    <div class="alert alert-warning text-center shadow-sm py-5 fs-3 my-5" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      Debes iniciar sesión para enviar un mensaje de contacto.
+      <div class="mt-3">
+        <a href="/gym/login" class="btn btn-primary btn-lg px-4 py-2">Iniciar Sesión</a>
+      </div>
+    </div>
+  }
+
+  @if(estaLogueado){
   <!-- Formulario de contacto -->
   <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)" class="contact-form mb-5">
     <h2 class="display-5 my-4 text-center">Contáctanos</h2>
@@ -79,6 +91,7 @@
       </div>
     }
   </form>
+}
 
 @if (esAdmin) {
   @if (mensajes.length > 0) {
