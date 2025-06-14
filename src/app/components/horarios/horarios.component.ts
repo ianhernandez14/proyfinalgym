@@ -5,6 +5,8 @@ import { AuthService } from '../../auth/auth.service';
 import { ActividadCardComponent } from '../actividad-card/actividad-card.component';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
+import { InscripcionService } from '../../services/inscripcion.service';
+import { Inscripcion } from '../../models/inscripcionModel';
 
 @Component({
   selector: 'app-horarios',
@@ -22,6 +24,8 @@ export class HorariosComponent {
   inscripcionesUsuario: any[] = [];
   currentUser: any = null;
   esAdmin: boolean = false;
+  estaLogueado: boolean = false;
+
 
   actividades = [
     { imagen: 'boxeo.jpg', titulo: 'Boxeo', horario: 'De lunes a domingo: 5 pm - 10 pm' },
@@ -30,14 +34,26 @@ export class HorariosComponent {
     { imagen: 'pesas.jpg', titulo: 'Pesas', horario: 'Lunes a domingo: 6 am - 10 pm' }
   ];
 
-constructor(private fb: FormBuilder, private authService: AuthService,private snackBar: MatSnackBar) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private inscripcionService: InscripcionService
+  ){}
 
   ngOnInit() {
+    const userInStorage = localStorage.getItem('currentUser');
     this.currentUser = this.authService.getCurrentUser();
     this.esAdmin = this.currentUser?.tipo_usuario === "admin";
+    this.estaLogueado = !!userInStorage && !!this.currentUser;
+
     console.log(this.esAdmin);
     this.generateMonths();
     
+    if (this.estaLogueado) {
+      this.cargarInscripcionesUsuario();
+    }
+
     this.horarioForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -49,7 +65,6 @@ constructor(private fb: FormBuilder, private authService: AuthService,private sn
       comments: [''],
       terms: [false, Validators.requiredTrue]
     });
-    this.cargarInscripcionesUsuario();
   }
 
      
@@ -117,14 +132,12 @@ constructor(private fb: FormBuilder, private authService: AuthService,private sn
   event.preventDefault();
 }
 
-eliminarInscripcion(id: number): void {
-  const inscripcionesStorage = localStorage.getItem('inscripciones');
-  let inscripciones = inscripcionesStorage ? JSON.parse(inscripcionesStorage) : [];
-  inscripciones = inscripciones.filter((i: any) => i.id !== id);
-  localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
-  this.cargarInscripcionesUsuario();
-}
-
+  eliminarInscripcion(id: number | string): void {
+    this.inscripcionService.eliminar(id.toString()).subscribe(() => {
+      this.cargarInscripcionesUsuario();
+      this.snackBar.open('¡Inscripción eliminada!', 'Cerrar', { duration: 2500 });
+    }, error => console.error(error));  
+  }
 
 
 
@@ -145,31 +158,38 @@ editarInscripcion(inscripcion: any): void {
 }
 
 
- onSubmit(): void {
-  if (this.horarioForm.invalid || this.mostrarAlerta) {
-    return;
-  }
+  onSubmit(): void {
+    if (this.horarioForm.invalid) {
+      return;
+    }
+  
 
   
   
   const inscripcion = {
-    id: this.editandoId ? this.editandoId : Date.now(),
-    ...this.horarioForm.value,
-    fechaInscripcion: new Date().toISOString(),
-    year: this.currentYear,
-    username: this.currentUser ? this.currentUser.nombre_completo : null
+      ...this.horarioForm.value,
+      fechaInscripcion: new Date().toISOString(), 
+      year: this.currentYear,
+      username: this.currentUser ? this.currentUser.nombre_completo : null   
   };
 
   const inscripcionesStorage = localStorage.getItem('inscripciones');
   let inscripciones = inscripcionesStorage ? JSON.parse(inscripcionesStorage) : [];
 
   if (this.editandoId) {
-    // Editar: reemplaza el registro existente
-    inscripciones = inscripciones.map((i: any) => i.id === this.editandoId ? inscripcion : i);
-    this.editandoId = null;
+    this.inscripcionService.actualizar(this.editandoId,inscripcion).subscribe(()=>{
+      this.snackBar.open('¡Inscripción actualizada!','Cerrar',{duration:2500});
+      this.cargarInscripcionesUsuario();
+      this.editandoId=null;
+      this.horarioForm.reset();
+    },error=>error.console(error));
   } else {
-    // Nuevo registro
-    inscripciones.push(inscripcion);
+    this.inscripcionService.crear(inscripcion).subscribe(()=>{
+      this.snackBar.open('¡Inscripción Creada!','Cerrar',{duration:2500});
+      this.cargarInscripcionesUsuario();
+      this.horarioForm.reset();
+    },error=>console.error(error));
+  
   }
 
   localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
@@ -185,8 +205,9 @@ editarInscripcion(inscripcion: any): void {
 }
 
  cargarInscripcionesUsuario(): void {
-  const inscripcionesStorage = localStorage.getItem('inscripciones');
-  this.inscripcionesUsuario = inscripcionesStorage ? JSON.parse(inscripcionesStorage) : [];
+  this.inscripcionService.obtenerTodas().subscribe(data=>{
+    this.inscripcionesUsuario=data;
+  },error=>console.error(error));
 }
   
   getCurrentDate(): string {

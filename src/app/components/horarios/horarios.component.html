@@ -60,6 +60,19 @@
   </section>
 
   <section id="horario-form" class="container form-reactivo w-50 text-light mt-5">
+  @if (!estaLogueado) {
+    <div class="alert alert-warning text-center shadow-sm py-5 fs-3 my-5" role="alert">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      Debes iniciar sesión para hacer una inscripción.
+      <div class="mt-3">
+        <a href="/gym/login" class="btn btn-primary btn-lg px-4 py-2">Iniciar Sesión</a>
+      </div>
+    </div>
+  }
+
+
+  @if(estaLogueado){
+
   <h2 class="mb-4">Formulario de Inscripción</h2>
   <form [formGroup]="horarioForm" (ngSubmit)="onSubmit()">
 
@@ -163,6 +176,7 @@
   </div>
 }
   </form>
+  } <!--if estaLogueado-->
 </section>
 
 
