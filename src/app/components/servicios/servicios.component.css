@@ -1,9 +1,7 @@
 html{
     background-color: #020822 !important;
+    overflow-x: hidden;
 }
-
-
-
 
 #entrenadores-section,
 #planes-section {
@@ -16,7 +14,6 @@ html{
 .titulo {
     padding-bottom: 30px;
 }
-
 
 #planes-section h2 {
     font-family: "Bebas Neue", sans-serif;
@@ -39,7 +36,6 @@ html{
     gap: 30px;
     padding: 0 20px;
 }
-
 
 .card {
     background: #070f2b;
@@ -87,7 +83,7 @@ html{
 .card ul {
     list-style: none;
     padding: 0;
-    margin-bottom: 10px;
+    margin: 15px 0;
 }
 
 .card ul li {
@@ -106,12 +102,12 @@ html{
     font-size: 1rem;
 }
 
-
 .buscador-entrenador-container {
   width: 100%;
   background: #020822;
   padding: 2rem 0;
- justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .buscador-entrenador {
@@ -121,11 +117,12 @@ html{
   box-shadow: 0 4px 24px 0 rgba(253, 253, 253, 0.836);
   border-radius: 0;
   overflow: hidden;
-   text-align: center;
+  text-align: center;
 }
 
 .buscador-entrenador .form-control {
   font-size: 1.3rem;
+  padding: 1rem;
   background: #ffffff;
   color: #fff;
   border-radius: 0 2rem 2rem 0;
@@ -166,6 +163,12 @@ body, .bg-dark {
   color: #2196f3 !important;
 }
 
+.buscador-dark {
+  width: 75vw;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
 .buscador-dark .mat-form-field-flex {
   background: #23272b !important;
   color: #fff !important;
@@ -193,12 +196,6 @@ body, .bg-dark {
   font-weight: 600;
 }
 
-@media (max-width: 900px) {
-  .buscador-dark {
-    width: 95vw !important;
-  }
-}
-
 mat-toolbar {
   background: #020822 !important;
   color: #fff !important;
@@ -211,13 +208,6 @@ mat-card.entrenador-seleccionado {
   z-index: 2;
 }
 
-
-.video-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .video-container {
   width: 100%;
   display: flex;
@@ -226,6 +216,7 @@ mat-card.entrenador-seleccionado {
   background: transparent;
   padding: 2rem 0;
 }
+
 .video-bg {
   background: #020b4a !important;
   border-radius: 18px;
@@ -234,5 +225,197 @@ mat-card.entrenador-seleccionado {
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+}
 
+.video-bg iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .card-group {
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .card {
+    max-width: 300px;
+  }
+  
+  .buscador-dark {
+    width: 85vw;
+  }
+}
+
+@media (max-width: 992px) {
+  #entrenadores-section,
+  #planes-section {
+    padding: 40px 20px;
+  }
+  
+  #planes-section h2 {
+    font-size: 2.8rem;
+  }
+  
+  #entrenadores-section h2 {
+    font-size: 2.4rem;
+  }
+  
+  .card-group {
+    gap: 15px;
+  }
+  
+  .card {
+    max-width: 280px;
+  }
+  
+  .card img {
+    height: 180px;
+  }
+  
+  .buscador-entrenador {
+    max-width: 90%;
+  }
+  
+  .video-bg iframe {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  #entrenadores-section,
+  #planes-section {
+    padding: 30px 15px;
+  }
+  
+  #planes-section h2 {
+    font-size: 2.4rem;
+  }
+  
+  #entrenadores-section h2 {
+    font-size: 2rem;
+  }
+  
+  .card-group {
+    gap: 10px;
+  }
+  
+  .card {
+    max-width: 250px;
+    padding: 15px;
+  }
+  
+  .card img {
+    height: 150px;
+  }
+  
+  .card h3 {
+    font-size: 1.4rem;
+  }
+  
+  .card p {
+    font-size: 1.1rem;
+  }
+  
+  .card ul li {
+    font-size: 1rem;
+  }
+  
+  .buscador-entrenador .form-control {
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  
+  .buscador-entrenador .input-group-text {
+    font-size: 1.2rem;
+  }
+  
+  .buscador-dark {
+    width: 95vw !important;
+  }
+  
+  .video-bg {
+    padding: 1rem;
+  }
+  
+  .video-bg iframe {
+    height: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  #planes-section h2 {
+    font-size: 2rem;
+  }
+  
+  #entrenadores-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .card-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    max-width: 90%;
+    width: 100%;
+  }
+  
+  .card img {
+    height: 120px;
+  }
+  
+  .video-bg iframe {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  #entrenadores-section,
+  #planes-section {
+    padding: 20px 10px;
+  }
+  
+  #planes-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  #entrenadores-section h2 {
+    font-size: 1.6rem;
+  }
+  
+  .card {
+    max-width: 95%;
+    padding: 10px;
+  }
+  
+  .card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .card p {
+    font-size: 1rem;
+  }
+  
+  .card ul li {
+    font-size: 0.9rem;
+  }
+  
+  .buscador-entrenador .form-control {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+  
+  .video-bg {
+    padding: 0.5rem;
+  }
+  
+  .video-bg iframe {
+    height: 180px;
+  }
 }

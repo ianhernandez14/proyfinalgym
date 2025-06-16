@@ -2,14 +2,11 @@
      background: #020822;
 }
 
-yacht-list {
+.yacht-list {
     text-align: center;
     padding: 50px 20px;
     color: #fff;
 }
-
-
-
 
 .yacht-list h2 {
     font-size: 2.5rem;
@@ -17,12 +14,15 @@ yacht-list {
     color:white;
     text-align: center;
 }
+
 .yacht-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     justify-content: center;
+    padding: 0 20px;
 }
+
 .yacht-card {
     background: #020822;
     border-radius: 10px;
@@ -30,24 +30,29 @@ yacht-list {
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
+
 .yacht-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
+
 .yacht-info {
     padding: 15px;
 }
+
 .yacht-info h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: #ffd700;
 }
+
 .yacht-info p {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: #ddd;
 }
+
 .details-button {
     display: inline-block;
     background: #004d40;
@@ -57,13 +62,16 @@ yacht-list {
     border-radius: 5px;
     transition: background 0.3s;
 }
+
 .details-button:hover {
     background: #00796b;
 }
+
 .featured {
     border: 2px solid #ffd700;
     position: relative;
 }
+
 .featured::before {
     content: "Featured";
     position: absolute;
@@ -77,7 +85,6 @@ yacht-list {
     border-radius: 3px;
 }
 
-
 .full-calendar-section {
   background: #020822;
   padding: 40px 20px !important;
@@ -86,14 +93,6 @@ yacht-list {
   margin-bottom: 0;
   color: white;
 }
-
-/* .container {
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  text-align: center;
-  
-} */
-
 
 .full-calendar {
   display: grid !important;
@@ -112,7 +111,6 @@ yacht-list {
   grid-template-columns: repeat(7, 1fr) !important;
   gap: 5px !important;
 }
-
 
 .calendar-day {
   aspect-ratio: 1 !important;
@@ -133,20 +131,20 @@ yacht-list {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 20px !important; /* Espacio entre elementos */
+  gap: 20px !important;
   margin: 20px 0 !important;
+  flex-wrap: wrap;
 }
 
 .current-year {
-  margin: 0 15px !important; /* Espacio a los lados del año */
+  margin: 0 15px !important;
   font-size: 1.8rem !important;
   color: white !important;
-  min-width: 80px; /* Ancho fijo para evitar saltos */
+  min-width: 80px;
   text-align: center;
 }
 
 .nav-button {
-  /* Mantén tus estilos anteriores o usa estos mínimos: */
   background: rgba(255,255,255,0.1) !important;
   border: none !important;
   color: white !important;
@@ -154,26 +152,12 @@ yacht-list {
   border-radius: 5px !important;
   cursor: pointer !important;
   transition: all 0.3s !important;
-  white-space: nowrap; /* Evita saltos de línea en el texto */
+  white-space: nowrap;
 }
 
 .nav-button:hover {
   background: rgba(255,255,255,0.2) !important;
 }
-
-
-@media (max-width: 600px) {
-  .year-controls {
-    flex-direction: row !important; /* Fuerza disposición horizontal */
-    flex-wrap: wrap; /* Permite saltos de línea si no caben */
-  }
-  
-  .nav-button {
-    padding: 6px 12px !important;
-    font-size: 0.9rem !important;
-  }
-}
-
 
 .calendar-day {
     background: rgba(255, 255, 255, 0.05);
@@ -202,7 +186,6 @@ yacht-list {
     color: #ff6b6b;
 }
 
-
 .calendar-day:hover {
     background: rgba(255, 255, 255, 0.15) !important;
 }
@@ -225,4 +208,199 @@ yacht-list {
   box-shadow: 0 4px 24px 0 rgba(46,204,64,0.25);
   letter-spacing: 1px;
   padding: 1.2rem 2rem !important;
+}
+
+.form-reactivo {
+  background: #020822 !important;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .full-calendar {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  }
+  
+  .yacht-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .yacht-list h2 {
+    font-size: 2.2rem;
+  }
+  
+  .yacht-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  .full-calendar {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 15px !important;
+  }
+  
+  .full-calendar-section {
+    padding: 30px 15px !important;
+    font-size: 1.3rem;
+  }
+  
+  .current-year {
+    font-size: 1.6rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .yacht-list {
+    padding: 40px 15px;
+  }
+  
+  .yacht-list h2 {
+    font-size: 2rem;
+  }
+  
+  .yacht-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 0 10px;
+  }
+  
+  .yacht-card img {
+    height: 150px;
+  }
+  
+  .yacht-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .yacht-info p {
+    font-size: 1.1rem;
+  }
+  
+  .full-calendar {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  }
+  
+  .full-calendar-section {
+    padding: 20px 10px !important;
+    font-size: 1.2rem;
+  }
+  
+  .year-controls {
+    flex-direction: row !important;
+    gap: 10px !important;
+  }
+  
+  .nav-button {
+    padding: 6px 12px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .current-year {
+    font-size: 1.4rem !important;
+    margin: 0 10px !important;
+  }
+  
+  .form-reactivo {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+  
+  .snackbar-grande-verde {
+    font-size: 1.1rem !important;
+    min-width: 250px !important;
+    padding: 1rem 1.5rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .yacht-list {
+    padding: 30px 10px;
+  }
+  
+  .yacht-list h2 {
+    font-size: 1.8rem;
+  }
+  
+  .yacht-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .full-calendar {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  
+  .month-card {
+    padding: 10px !important;
+  }
+  
+  .days-grid {
+    gap: 3px !important;
+  }
+  
+  .calendar-day {
+    padding: 4px;
+    font-size: 0.8rem;
+  }
+  
+  .year-controls {
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+  
+  .nav-button {
+    padding: 5px 10px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .current-year {
+    font-size: 1.2rem !important;
+    width: 100%;
+    margin: 10px 0 !important;
+  }
+  
+  .form-reactivo {
+    width: 95% !important;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .yacht-list h2 {
+    font-size: 1.6rem;
+  }
+  
+  .yacht-card {
+    margin: 0 auto;
+    max-width: 90%;
+  }
+  
+  .full-calendar-section {
+    padding: 15px 5px !important;
+    font-size: 1rem;
+  }
+  
+  .month-card {
+    padding: 8px !important;
+  }
+  
+  .calendar-day {
+    padding: 3px;
+    font-size: 0.7rem;
+  }
+  
+  .snackbar-grande-verde {
+    font-size: 1rem !important;
+    min-width: 200px !important;
+    padding: 0.8rem 1rem !important;
+  }
+  
+  .form-reactivo {
+    width: 98% !important;
+    padding: 10px;
+  }
 }

@@ -3,6 +3,7 @@
   text-align: left;
   color: white;
   background: #020822;
+  overflow-x: hidden;
 }
 
 #contacto-section h2{
@@ -96,12 +97,156 @@
   font-size: 1.5rem;
 }
 
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .contact-form {
+    max-width: 50%;
+  }
+  
+  .card-group {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  #contacto-section {
+    padding: 40px 20px;
+  }
+  
+  #contacto-section h2 {
+    font-size: 2.6rem;
+  }
+  
+  .contact-form {
+    max-width: 70%;
+  }
+  
+  .card-group {
+    gap: 15px;
+  }
+  
+  .card {
+    max-width: 280px;
+  }
+  
+  .card img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  #contacto-section {
+    padding: 30px 15px;
+  }
+  
+  #contacto-section h2 {
+    font-size: 2.2rem;
+  }
+  
+  .contact-form {
+    max-width: 90%;
+  }
+  
+  .card-group {
+    gap: 10px;
+  }
+  
+  .card {
+    max-width: 250px;
+    padding: 15px;
+  }
+  
+  .card img {
+    height: 150px;
+  }
+  
+  .card h3 {
+    font-size: 1.4rem;
+  }
+  
+  .card p {
+    font-size: 1.1rem;
+  }
+  
+  .mensajes-card {
+    width: 95vw;
+  }
+  
+  .mensajes-table {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #contacto-section h2 {
+    font-size: 2rem;
+  }
+  
+  .contact-form {
+    max-width: 95%;
+  }
+  
+  .card-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    max-width: 90%;
+    width: 100%;
+  }
+  
+  .card img {
+    height: 120px;
+  }
+  
+  .mensajes-table {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 500px) {
   .mensajes-card {
     width: 98vw;
     padding: 0;
   }
+  
   .mensajes-table {
     font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #contacto-section {
+    padding: 20px 10px;
+  }
+  
+  #contacto-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .contact-form {
+    max-width: 98%;
+  }
+  
+  .card {
+    max-width: 95%;
+    padding: 10px;
+  }
+  
+  .card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .card p {
+    font-size: 1rem;
+  }
+  
+  .card img {
+    height: 100px;
+  }
+  
+  .mensajes-table {
+    font-size: 0.9rem;
   }
 }
