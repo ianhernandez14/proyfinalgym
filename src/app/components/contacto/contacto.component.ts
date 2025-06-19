@@ -45,7 +45,22 @@ export class ContactoComponent{
       nombre: 'Ian Alejandro Hernández Aranda',
       imagen: 'Ian.jpg',
       rol: 'Desarrollador'
+    },  {
+      nombre: 'Juan Osbaldo Escalera Valenciano',
+      imagen: 'osbaldo.jpeg',
+      rol: 'Desarrollador'
+    },
+    {
+      nombre: 'Emiliano Jahir Espinoza Herrera',
+      imagen: 'emiliano.jpeg',
+      rol: 'Desarrollador'
+    },
+    {
+      nombre: 'Miguel Angel Esparza Torres',
+      imagen: 'torres.jpeg',
+      rol: 'Desarrollador'
     }
+    
   ];
 
   constructor(

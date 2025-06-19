@@ -66,3 +66,24 @@ body {
     min-height: 60px;
   }
 }
+
+.alto-contraste {
+  filter: invert(1) hue-rotate(180deg) contrast(1.2);
+  background-color: #000 !important;
+  color: #fff !important;
+}
+body {
+  font-size: 0.75rem; 
+}
+
+
+.fuente-grande,
+.fuente-grande * {
+  font-size: 1.15rem !important;
+}
+
+
+.tipografia-alternativa,
+.tipografia-alternativa * {
+  font-family: 'Comic Sans MS', Arial, sans-serif !important;
+}

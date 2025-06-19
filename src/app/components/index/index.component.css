@@ -387,3 +387,115 @@ app-nav{
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(225, 228, 85, 0.4);
 }
+.accesibilidad-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+}
+
+/* Botón circular */
+.accesibilidad-btn {
+  width: 60px;
+  height: 60px;
+  background-color: #2C5282;
+  color: #FFD700;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(77, 168, 218, 0.4);
+  border: 3px solid #FFD700;
+  transition: transform 0.4s ease;
+}
+
+.accesibilidad-btn i {
+  font-size: 1.8rem;
+}
+
+/* Menú oculto por defecto */
+.accesibilidad-menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 240px;
+  height: 240px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.1);
+  transform-origin: bottom right;
+  transition: all 0.4s ease;
+}
+
+.accesibilidad-container:hover .accesibilidad-menu,
+.accesibilidad-menu.visible {
+  pointer-events: auto;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.accesibilidad-menu li {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #E6F4FF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid #FFD700;
+  color: #2C5282;
+  transition: all 0.3s ease;
+}
+
+.accesibilidad-menu li i {
+  font-size: 1.3rem;
+}
+
+/* Posiciones */
+.accesibilidad-menu li:nth-child(1) {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.accesibilidad-menu li:nth-child(2) {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+.accesibilidad-menu li:nth-child(3) {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.accesibilidad-menu li:nth-child(4) {
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.accesibilidad-menu li:hover {
+  background-color: #FFD700;
+  transform: scale(1.2);
+  color: #2C5282;
+}
+
+/* Accesibilidad */
+.alto-contraste {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+.fuente-grande {
+  font-size: 1.25em !important;
+}
+.tipografia-alternativa {
+  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+}
+:host {
+  font-size: 0.85rem; 
+}
+body:not(.fuente-grande) .index-root {
+  font-size: 0.85rem;
+}
