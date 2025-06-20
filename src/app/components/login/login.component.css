@@ -271,4 +271,17 @@ button[type="submit"]:disabled {
   .alert-content {
     padding: 1rem;
   }
+
+  .recaptcha-wrapper {
+  transform: scale(0.9);
+  transform-origin: center;
+  }
+}
+
+.recaptcha-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }

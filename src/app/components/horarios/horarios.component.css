@@ -1,94 +1,90 @@
-*{
-     background: #020822;
-}
-
 .yacht-list {
-    text-align: center;
-    padding: 50px 20px;
-    color: #fff;
+  text-align: center;
+  padding: 50px 20px;
+  color: #fff;
 }
 
 .yacht-list h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color:white;
-    text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
 }
 
 .yacht-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 0 20px;
 }
 
 .yacht-card {
-    background: #020822;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  background: #020822;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .yacht-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .yacht-info {
-    padding: 15px;
+  padding: 15px;
 }
 
 .yacht-info h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #ffd700;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #ffd700;
 }
 
 .yacht-info p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #ddd;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ddd;
 }
 
 .details-button {
-    display: inline-block;
-    background: #004d40;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+  display: inline-block;
+  background: #004d40;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
 }
 
 .details-button:hover {
-    background: #00796b;
+  background: #00796b;
 }
 
 .featured {
-    border: 2px solid #ffd700;
-    position: relative;
+  border: 2px solid #ffd700;
+  position: relative;
 }
 
 .featured::before {
-    content: "Featured";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ffd700;
-    color: #000;
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 3px;
+  content: "Featured";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ffd700;
+  color: #000;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 3px;
 }
 
 .full-calendar-section {
   background: #020822;
   padding: 40px 20px !important;
-  font-family: "Bebas Neue", sans-serif ;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0;
   color: white;
@@ -145,7 +141,7 @@
 }
 
 .nav-button {
-  background: rgba(255,255,255,0.1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   border: none !important;
   color: white !important;
   padding: 8px 15px !important;
@@ -156,44 +152,44 @@
 }
 
 .nav-button:hover {
-  background: rgba(255,255,255,0.2) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .calendar-day {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
-    padding: 8px;
-    text-align: center;
-    color: #fff;
-    font-size: 0.9rem;
-    transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  padding: 8px;
+  text-align: center;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: all 0.2s;
 }
 
 .calendar-day:hover {
-    background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .calendar-day.empty {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .calendar-day.today {
-    background: #4e0eff;
-    font-weight: bold;
+  background: #4e0eff;
+  font-weight: bold;
 }
 
 .calendar-day.weekend {
-    color: #ff6b6b;
+  color: #ff6b6b;
 }
 
 .calendar-day:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
 }
 
-.container2{
+.container2 {
   width: 100%;
   height: auto;
-  background-color: #020822 !important;  
+  background-color: #020822 !important;
 }
 
 .snackbar-grande-verde {
@@ -205,24 +201,169 @@
   max-width: 90vw !important;
   text-align: center;
   border-radius: 12px !important;
-  box-shadow: 0 4px 24px 0 rgba(46,204,64,0.25);
+  box-shadow: 0 4px 24px 0 rgba(46, 204, 64, 0.25);
   letter-spacing: 1px;
   padding: 1.2rem 2rem !important;
 }
 
+/* Contenedor principal del formulario */
 .form-reactivo {
-  background: #020822 !important;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 100%;
+  background-color: #0e1a3a !important;
+  /* azul oscuro profundo */
+  border-radius: 15px;
+  padding: 40px 3rem;
+  max-width: 600px;
+  margin: 3rem auto 4rem auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  color: #fff !important;
+  font-family: 'Segoe UI', sans-serif;
 }
+
+/* Título */
+.form-reactivo h2 {
+  color: #ffd700 !important;
+  /* dorado */
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #fff !important;
+  transition: color 0.3s ease;
+}
+
+/* Inputs, selects y textarea */
+.form-control,
+.form-select,
+textarea.form-control {
+  width: 100%;
+  background-color: #141f3b !important;
+  /* azul oscuro */
+  border: 1px solid #34486b !important;
+  /* azul medio */
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1.1rem;
+  color: #fff !important;
+  box-shadow: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  resize: vertical;
+}
+
+/* Placeholder */
+.form-control::placeholder,
+.form-select option {
+  color: #a0a8c1 !important;
+  /* gris azulado */
+}
+
+/* Focus */
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  border-color: #ffd700 !important;
+  /* dorado */
+  box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25) !important;
+  color: #fff !important;
+}
+
+/* Validación */
+.text-danger {
+  color: #ff6b6b !important;
+  /* rojo suave */
+  font-size: 0.95rem;
+  margin-top: 5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.text-danger::before {
+  content: "⚠️";
+  font-size: 1rem;
+}
+
+/* Checkbox */
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 5px;
+  border: 1px solid #34486b !important;
+  background: #141f3b !important;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.form-check-input:checked {
+  background: #ffd700 !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.8) !important;
+}
+
+.form-check-label {
+  color: #fff !important;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Botón enviar */
+button[type="submit"] {
+  width: 100%;
+  background-color: #ffd700;
+  color: #000;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+  margin-top: 1rem;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #ffcc00;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.7);
+}
+
+button[type="submit"]:disabled {
+  background-color: #999 !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Alertas */
+.alert-success {
+  background-color: #198754;
+  color: white;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(25, 135, 84, 0.8);
+}
+
 
 /* Responsive Design */
 @media (max-width: 1200px) {
   .full-calendar {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
   }
-  
+
   .yacht-container {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
@@ -232,22 +373,22 @@
   .yacht-list h2 {
     font-size: 2.2rem;
   }
-  
+
   .yacht-container {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
   }
-  
+
   .full-calendar {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
     gap: 15px !important;
   }
-  
+
   .full-calendar-section {
     padding: 30px 15px !important;
     font-size: 1.3rem;
   }
-  
+
   .current-year {
     font-size: 1.6rem !important;
   }
@@ -257,57 +398,65 @@
   .yacht-list {
     padding: 40px 15px;
   }
-  
+
   .yacht-list h2 {
     font-size: 2rem;
   }
-  
+
   .yacht-container {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     padding: 0 10px;
   }
-  
+
   .yacht-card img {
     height: 150px;
   }
-  
+
   .yacht-info h3 {
     font-size: 1.3rem;
   }
-  
+
   .yacht-info p {
     font-size: 1.1rem;
   }
-  
+
   .full-calendar {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
   }
-  
+
   .full-calendar-section {
     padding: 20px 10px !important;
     font-size: 1.2rem;
   }
-  
+
   .year-controls {
     flex-direction: row !important;
     gap: 10px !important;
   }
-  
+
   .nav-button {
     padding: 6px 12px !important;
     font-size: 0.9rem !important;
   }
-  
+
   .current-year {
     font-size: 1.4rem !important;
     margin: 0 10px !important;
   }
-  
+
   .form-reactivo {
-    width: 90% !important;
-    margin: 0 auto;
+    padding: 2rem 1.5rem;
   }
-  
+
+  .form-reactivo h2 {
+    font-size: 1.8rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1.1rem;
+    padding: 12px 0;
+  }
+
   .snackbar-grande-verde {
     font-size: 1.1rem !important;
     min-width: 250px !important;
@@ -319,50 +468,50 @@
   .yacht-list {
     padding: 30px 10px;
   }
-  
+
   .yacht-list h2 {
     font-size: 1.8rem;
   }
-  
+
   .yacht-container {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  
+
   .full-calendar {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
-  
+
   .month-card {
     padding: 10px !important;
   }
-  
+
   .days-grid {
     gap: 3px !important;
   }
-  
+
   .calendar-day {
     padding: 4px;
     font-size: 0.8rem;
   }
-  
+
   .year-controls {
     flex-wrap: wrap;
     justify-content: center !important;
   }
-  
+
   .nav-button {
     padding: 5px 10px !important;
     font-size: 0.8rem !important;
   }
-  
+
   .current-year {
     font-size: 1.2rem !important;
     width: 100%;
     margin: 10px 0 !important;
   }
-  
+
   .form-reactivo {
     width: 95% !important;
     padding: 15px;
@@ -373,34 +522,34 @@
   .yacht-list h2 {
     font-size: 1.6rem;
   }
-  
+
   .yacht-card {
     margin: 0 auto;
     max-width: 90%;
   }
-  
+
   .full-calendar-section {
     padding: 15px 5px !important;
     font-size: 1rem;
   }
-  
+
   .month-card {
     padding: 8px !important;
   }
-  
+
   .calendar-day {
     padding: 3px;
     font-size: 0.7rem;
   }
-  
+
   .snackbar-grande-verde {
     font-size: 1rem !important;
     min-width: 200px !important;
     padding: 0.8rem 1rem !important;
   }
-  
+
   .form-reactivo {
-    width: 98% !important;
-    padding: 10px;
+    padding: 1.5rem 1rem;
+    width: 95% !important;
   }
 }

@@ -2,14 +2,14 @@
 
   @if (showWelcomeMessage)
   {
-    <div class="custom-alert">
-      <div class="alert-content">
-        <h3>¡Bienvenido {{ welcomeName }}!</h3>
-        <p>Has iniciado sesión correctamente</p>
-        <button (click)="closeWelcomeMessage()">Aceptar</button>
-      </div>
-      <div class="alert-overlay" (click)="closeWelcomeMessage()"></div>
+  <div class="custom-alert">
+    <div class="alert-content">
+      <h3>¡Bienvenido {{ welcomeName }}!</h3>
+      <p>Has iniciado sesión correctamente</p>
+      <button (click)="closeWelcomeMessage()">Aceptar</button>
     </div>
+    <div class="alert-overlay" (click)="closeWelcomeMessage()"></div>
+  </div>
   }
 
   <div class="form-box d-block">
@@ -18,32 +18,29 @@
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="input-group">
         <label>Usuario</label>
-        <input 
-          type="text" 
-          [(ngModel)]="email" 
-          name="email"
-          placeholder="Ingrese su correo"
-          required>
+        <input type="text" [(ngModel)]="email" name="email" placeholder="Ingrese su correo" required>
       </div>
 
       <div class="input-group">
         <label>Contraseña</label>
-        <input 
-          type="password" 
-          [(ngModel)]="password" 
-          name="password"
-          placeholder="Ingrese su contraseña"
-          required>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Ingrese su contraseña" required>
       </div>
+
+      <!--aquí insertamos el reCAPTCHA-->
+      <div class="recaptcha-wrapper">
+        <div id="recaptcha"></div>
+      </div>
+
+
 
       @if (errorMessage)
       {
-        <div class="error-message">
-          {{ errorMessage }}
-        </div>
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
       }
 
-      <button type="submit" [disabled]="!loginForm.valid">
+      <button type="submit" [disabled]="!loginForm.valid || !recaptchaToken">
         Ingresar
       </button>
     </form>

@@ -1,117 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GYM</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GYM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap" rel="stylesheet">
 
 
-  
+
 </head>
+
 <body>
-      <div class="index-root">
+  <div class="index-root">
 
     <section id="home" class="hero">
-        <video autoplay muted loop playsinline preload="auto" controls>
-            <source src="./videoInicio.mp4" type="video/mp4">
-            <source src="./videoInicio.webm" type="video/webm">
-            Tu navegador no soporta el elemento video.
-        </video>
-        <div class="hero-text">
-            <h1>GYM Exclusivo–</h1>
-            <h1>El mejor GYM nunca antes visto</h1>
-            <p>Perfecto para cada actividad – Boxeo, Pesas, y explora lo que te gusta</p>
-            <a [routerLink]="['/servicios']" class="btn">Ver Servicios</a>
-        </div>
+      <video autoplay muted loop playsinline preload="auto" controls>
+        <source src="./videoInicio.mp4" type="video/mp4">
+        <source src="./videoInicio.webm" type="video/webm">
+        Tu navegador no soporta el elemento video.
+      </video>
+      <div class="hero-text">
+        <h1>GYM Exclusivo–</h1>
+        <h1>El mejor GYM nunca antes visto</h1>
+        <p>Perfecto para cada actividad – Boxeo, Pesas, y explora lo que te gusta</p>
+        <a [routerLink]="['/servicios']" class="btn">Ver Servicios</a>
+      </div>
     </section>
 
     <section id="yachts" class="yacht-list">
-        <h2>Servicios Individuales</h2>
-    <div class="yacht-container">
+      <h2>Servicios Individuales</h2>
+      <div class="yacht-container">
         <div class="yacht-card featured" data-price="4900">
-            <img src="boxeo.jpg" alt="74' Sunseeker 2023">
-            <div class="yacht-info">
-                <h3>Boxeo</h3>
-                <p>Precio: $299/mes</p>
+          <img src="boxeo.jpg" alt="74' Sunseeker 2023">
+          <div class="yacht-info">
+            <h3>Boxeo</h3>
+            <p>Precio: $299/mes</p>
 
-            </div>
+          </div>
         </div>
         <div class="yacht-card featured" data-price="4500">
-            <img src="mma.jpg" alt="88' Princess Overtime">
-            <div class="yacht-info">
-                <h3>MMA</h3>
-                <p>Precio: $299/mes</p>
- 
-            </div>
+          <img src="mma.jpg" alt="88' Princess Overtime">
+          <div class="yacht-info">
+            <h3>MMA</h3>
+            <p>Precio: $299/mes</p>
+
+          </div>
         </div>
         <div class="yacht-card" data-price="4500">
-            <img src="zumba.jpg" alt="68' Galeon 2025">
-            <div class="yacht-info">
-                <h3>Zumba</h3>
-                <p>Precio $399/mes</p>
+          <img src="zumba.jpg" alt="68' Galeon 2025">
+          <div class="yacht-info">
+            <h3>Zumba</h3>
+            <p>Precio $399/mes</p>
 
-            </div>
+          </div>
         </div>
         <div class="yacht-card" data-price="3200">
-            <img src="pesas.jpg" alt="53' Galeon Infinity">
-            <div class="yacht-info">
-                <h3>Pesas</h3>
-                <p>Precio: $399/mes</p>
-            </div>
+          <img src="pesas.jpg" alt="53' Galeon Infinity">
+          <div class="yacht-info">
+            <h3>Pesas</h3>
+            <p>Precio: $399/mes</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="img1.jpg" class="d-block w-100" alt="Imagen 1">
+        </div>
+        <div class="carousel-item">
+          <img src="img2.jpg" class="d-block w-100" alt="Imagen 2">
+        </div>
+        <div class="carousel-item">
+          <img src="img3.jpg" class="d-block w-100" alt="Imagen 3">
+        </div>
+      </div>
+
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
     </div>
-</section>
 
 
-<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="2000">
-        <img src="img1.jpg" class="d-block w-100" alt="Imagen 1">
+    
+    <div class="accesibilidad-container" [class.activo]="menuFijo" (mouseenter)="!menuFijo && (menuFijo = false)"
+      (mouseleave)="!menuFijo && (menuFijo = false)">
+
+      <div class="accesibilidad-btn" (mouseenter)="!menuFijo && (menuFijo = true)" (click)="toggleFijarMenu()">
+        <i class="bi bi-universal-access-circle"></i>
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img2.jpg" class="d-block w-100" alt="Imagen 2">
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img3.jpg" class="d-block w-100" alt="Imagen 3">
-      </div>
+
+      <ul class="accesibilidad-menu" [class.visible]="menuFijo">
+        <li title="Lector" (click)="activarLector()"><i class="bi bi-speaker"></i></li>
+        <li title="Contraste" (click)="toggleContraste()"><i class="bi bi-sun"></i></li>
+        <li title="Texto" (click)="aumentarTexto()"><i class="bi bi-text-indent-left"></i></li>
+        <li title="Tipografía" (click)="cambiarTipografia()"><i class="bi bi-type"></i></li>
+      </ul>
     </div>
-  
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
   </div>
-
-<div class="accesibilidad-container"
-     [class.activo]="menuFijo"
-     (mouseenter)="!menuFijo && (menuFijo = false)"
-     (mouseleave)="!menuFijo && (menuFijo = false)">
-
-  <div class="accesibilidad-btn"
-       (mouseenter)="!menuFijo && (menuFijo = true)"
-       (click)="toggleFijarMenu()">
-    <i class="bi bi-universal-access-circle"></i>
-  </div>
-
-  <ul class="accesibilidad-menu" [class.visible]="menuFijo">
-    <li title="Lector" (click)="activarLector()"><i class="bi bi-speaker"></i></li>
-    <li title="Contraste" (click)="toggleContraste()"><i class="bi bi-sun"></i></li>
-    <li title="Texto" (click)="aumentarTexto()"><i class="bi bi-text-indent-left"></i></li>
-    <li title="Tipografía" (click)="cambiarTipografia()"><i class="bi bi-type"></i></li>
-  </ul>
-</div>
-</div>
 
 
 </body>
+
 </html>

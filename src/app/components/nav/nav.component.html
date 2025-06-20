@@ -1,31 +1,31 @@
 <nav>
   <div class="logo">
     <img [src]="logoPath" alt="Logo">
-   <p>"Querer es poder"</p>
+    <p>"Querer es poder"</p>
   </div>
-   
-  
+
+
   <ul class="nav-links mt-3">
-    <li><a [routerLink]="['/index']">{{"inicio" | uppercase}}</a></li>
-    <li><a [routerLink]="['/servicios']">{{"servicios" | uppercase}}</a></li>
-    <li><a [routerLink]="['/contacto']">{{"contacto" | uppercase}}</a></li>
-    <li><a [routerLink]="['/horarios']">{{"horarios" | uppercase}}</a></li>
+    <li><a [routerLink]="['/index']" routerLinkActive="active">{{"inicio" | uppercase}}</a></li>
+    <li><a [routerLink]="['/servicios']" routerLinkActive="active">{{"servicios" | uppercase}}</a></li>
+    <li><a [routerLink]="['/contacto']" routerLinkActive="active">{{"contacto" | uppercase}}</a></li>
+    <li><a [routerLink]="['/horarios']" routerLinkActive="active">{{"horarios" | uppercase}}</a></li>
   </ul>
-  
+
   <div class="user-section">
     @if (currentUser)
     {
-      <div class="user-info">
-        <span class="user-name">{{ currentUser.nombre_completo }}</span>
-        <img src="user.png" alt="Usuario" class="user-avatar">
-        <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
-      </div>
+    <div class="user-info">
+      <span class="user-name">{{ currentUser.nombre_completo }}</span>
+      <img src="user.png" alt="Usuario" class="user-avatar">
+      <button (click)="logout()" class="logout-btn">Cerrar sesión</button>
+    </div>
     }
     @else
     {
-      <a [routerLink]="['/login']" class="login-link">
-        <img src="login.png" alt="Login" class="login-icon">
-      </a>
+    <a [routerLink]="['/login']" class="login-link">
+      <img src="login.png" alt="Login" class="login-icon">
+    </a>
     }
   </div>
 </nav>

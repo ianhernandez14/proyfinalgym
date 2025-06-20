@@ -57,7 +57,7 @@ export class ContactoComponent{
     },
     {
       nombre: 'Miguel Angel Esparza Torres',
-      imagen: 'torres.jpeg',
+      imagen: 'torres.jpg',
       rol: 'Desarrollador'
     }
     

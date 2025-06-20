@@ -6,7 +6,7 @@
   overflow-x: hidden;
 }
 
-#contacto-section h2{
+#contacto-section h2 {
   text-align: center;
 }
 
@@ -60,20 +60,108 @@
   margin-bottom: 8px;
 }
 
-.container{
+.container {
   width: 100%;
   height: auto;
 }
 
-.contact-form{
-  max-width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  margin-bottom: 5rem;
+.contact-form {
+  margin-top: 4rem;
+  max-width: 600px;
+  background: #0e1a3a !important;
+  padding: 40px;
+  border-radius: 15px;
+  margin: 0 auto 5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+.contact-form .btn[disabled] {
+  background-color: #999 !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+.contact-form h2 {
+  color: #ffd700 !important;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact-form .form-label {
+  font-size: 1.25rem;
+  color: #fff !important;
+  margin-bottom: 10px;
+}
+
+.contact-form .form-control {
+  background-color: #141f3b !important;
+  border: 1px solid #34486b !important;
+  color: #fff !important;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.contact-form .form-control:focus {
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25) !important;
+}
+
+.contact-form .text-danger {
+  font-size: 0.95rem;
+  color: #ff6b6b !important;
+  margin-top: 5px;
+}
+
+.contact-form .btn {
+  background-color: #ffd700 !important;
+  color: #000 !important;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  border: none;
+}
+
+.contact-form .btn:hover {
+  background-color: #ffcc00 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+.alert-warning,
+.alert-success,
+.alert-info {
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 30px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+.alert-warning {
+  background-color: #fff3cd !important;
+  color: #856404 !important;
+  border: 1px solid #ffeeba !important;
+}
+
+.alert-success {
+  background-color: #d4edda !important;
+  color: #155724 !important;
+  border: 1px solid #c3e6cb !important;
+}
+
+.alert-info {
+  background-color: #d1ecf1 !important;
+  color: #0c5460 !important;
+  border: 1px solid #bee5eb !important;
+}
 
 .mensajes-section {
   width: 100vw;
@@ -90,7 +178,7 @@
   min-width: 320px;
   margin: 0 auto;
   border-radius: 1.5rem;
-  box-shadow: 0 0 32px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .mensajes-table {
@@ -102,7 +190,7 @@
   .contact-form {
     max-width: 50%;
   }
-  
+
   .card-group {
     gap: 20px;
   }
@@ -112,23 +200,23 @@
   #contacto-section {
     padding: 40px 20px;
   }
-  
+
   #contacto-section h2 {
     font-size: 2.6rem;
   }
-  
+
   .contact-form {
     max-width: 70%;
   }
-  
+
   .card-group {
     gap: 15px;
   }
-  
+
   .card {
     max-width: 280px;
   }
-  
+
   .card img {
     height: 180px;
   }
@@ -138,40 +226,40 @@
   #contacto-section {
     padding: 30px 15px;
   }
-  
+
   #contacto-section h2 {
     font-size: 2.2rem;
   }
-  
+
   .contact-form {
-    max-width: 90%;
+    padding: 30px;
   }
-  
+
   .card-group {
     gap: 10px;
   }
-  
+
   .card {
     max-width: 250px;
     padding: 15px;
   }
-  
+
   .card img {
     height: 150px;
   }
-  
+
   .card h3 {
     font-size: 1.4rem;
   }
-  
+
   .card p {
     font-size: 1.1rem;
   }
-  
+
   .mensajes-card {
     width: 95vw;
   }
-  
+
   .mensajes-table {
     font-size: 1.2rem;
   }
@@ -181,25 +269,25 @@
   #contacto-section h2 {
     font-size: 2rem;
   }
-  
+
   .contact-form {
     max-width: 95%;
   }
-  
+
   .card-group {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .card {
     max-width: 90%;
     width: 100%;
   }
-  
+
   .card img {
     height: 120px;
   }
-  
+
   .mensajes-table {
     font-size: 1rem;
   }
@@ -210,7 +298,7 @@
     width: 98vw;
     padding: 0;
   }
-  
+
   .mensajes-table {
     font-size: 1.1rem;
   }
@@ -220,32 +308,40 @@
   #contacto-section {
     padding: 20px 10px;
   }
-  
+
   #contacto-section h2 {
     font-size: 1.8rem;
   }
-  
+
   .contact-form {
-    max-width: 98%;
+    padding: 20px;
   }
-  
+
+  .contact-form h2 {
+    font-size: 2rem;
+  }
+
+  .contact-form .btn {
+    font-size: 1.1rem;
+  }
+
   .card {
     max-width: 95%;
     padding: 10px;
   }
-  
+
   .card h3 {
     font-size: 1.2rem;
   }
-  
+
   .card p {
     font-size: 1rem;
   }
-  
+
   .card img {
     height: 100px;
   }
-  
+
   .mensajes-table {
     font-size: 0.9rem;
   }
