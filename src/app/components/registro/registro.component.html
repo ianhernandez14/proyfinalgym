@@ -1,0 +1,83 @@
+<div class="registro-container">
+
+  @if (showSuccessMessage)
+  {
+  <div class="custom-alert">
+    <div class="alert-content">
+      <h3>¡Registro Exitoso!</h3>
+      <p>Tu cuenta ha sido creada correctamente</p>
+      <button (click)="closeSuccessMessage()">Aceptar</button>
+    </div>
+    <div class="alert-overlay" (click)="closeSuccessMessage()"></div>
+  </div>
+  }
+
+  <div class="form-box d-block">
+    <h2>Registro de Usuario</h2>
+
+    <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+      <div class="input-group">
+        <label>Nombre Completo</label>
+        <input type="text" [(ngModel)]="nombreCompleto" name="nombreCompleto" placeholder="Ingrese su nombre completo" required>
+      </div>
+
+      <div class="input-group">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Ingrese su correo electrónico" required>
+      </div>
+
+      <div class="input-group">
+        <label>Número de Teléfono</label>
+        <div class="phone-input-container">
+          <select [(ngModel)]="codigoPais" name="codigoPais" class="country-code">
+            <option value="+52">🇲🇽 +52 </option>
+            <option value="+1">🇺🇸 +1 </option>
+            <option value="+33">🇫🇷 +33 </option>
+            <option value="+34">🇪🇸 +34 </option>
+            <option value="+49">🇩🇪 +49 </option>
+            <option value="+44">🇬🇧 +44 </option>
+            <option value="+39">🇮🇹 +39 </option>
+            <option value="+81">🇯🇵 +81 </option>
+            <option value="+86">🇨🇳 +86 </option>
+            <option value="+91">🇮🇳 +91 </option>
+          </select>
+          <input type="tel" [(ngModel)]="numeroTelefono" name="numeroTelefono" 
+                 placeholder="55 1234 5678" 
+                 maxlength="12" 
+                 (input)="onNumeroTelefonoInput($event)"
+                 class="phone-number">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Ingrese su contraseña" required>
+      </div>
+
+      <div class="input-group">
+        <label>Confirmar Contraseña</label>
+        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirme su contraseña" required>
+      </div>
+
+      <!--aquí insertamos el reCAPTCHA-->
+      <div class="recaptcha-wrapper">
+        <div id="recaptcha"></div>
+      </div>
+
+      @if (errorMessage)
+      {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <button type="submit" [disabled]="!registroForm.valid || !recaptchaToken || !passwordsMatch()">
+        Registrarse
+      </button>
+
+      <div class="toggle-mode">
+        <button type="button" (click)="goToLogin()">¿Ya tienes cuenta? Inicia sesión</button>
+      </div>
+    </form>
+  </div>
+</div>

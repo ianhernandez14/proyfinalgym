@@ -20,12 +20,32 @@
 <body>
   <div class="index-root">
 
-    <section id="home" class="hero">
-      <video autoplay muted loop playsinline preload="auto" controls>
+    <section id="home" class="hero" (mouseenter)="showVolumeControls = true" (mouseleave)="showVolumeControls = false">
+      <video autoplay muted loop playsinline preload="auto" #videoPlayer>
         <source src="./videoInicio.mp4" type="video/mp4">
         <source src="./videoInicio.webm" type="video/webm">
         Tu navegador no soporta el elemento video.
       </video>
+      
+      <!-- Controles de volumen estilo YouTube -->
+      <div class="video-controls" [class.show]="showVolumeControls">
+        <div class="volume-control">
+          <button class="volume-btn" (click)="toggleMute()" [title]="isMuted ? 'Activar sonido' : 'Silenciar'">
+            <i class="bi" [class.bi-volume-mute-fill]="isMuted" [class.bi-volume-up-fill]="!isMuted"></i>
+          </button>
+          <div class="volume-bar-container">
+            <div class="volume-bar" 
+                 (mousedown)="onVolumeBarClick($event)"
+                 (mousemove)="onVolumeBarDrag($event)"
+                 (mouseup)="onVolumeBarRelease()"
+                 (mouseleave)="onVolumeBarRelease()">
+              <div class="volume-fill" [style.width.%]="volume"></div>
+              <div class="volume-handle" [style.left.%]="volume"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="hero-text">
         <h1>GYM Exclusivo–</h1>
         <h1>El mejor GYM nunca antes visto</h1>

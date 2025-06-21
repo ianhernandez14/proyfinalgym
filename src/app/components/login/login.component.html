@@ -43,6 +43,10 @@
       <button type="submit" [disabled]="!loginForm.valid || !recaptchaToken">
         Ingresar
       </button>
+
+      <div class="toggle-mode">
+        <button type="button" (click)="goToRegistro()">¿No tienes cuenta? Regístrate</button>
+      </div>
     </form>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,12 +8,103 @@ import { RouterModule } from '@angular/router';
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit {
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
+  
   menuFijo = false;
   private lectorActivo = false;
   private mensaje: SpeechSynthesisUtterance | null = null;
+  
+  // Propiedades para control de volumen
+  isMuted = true;
+  volume = 50;
+  showVolumeControls = false;
+
+  private isDragging = false;
 
   constructor(private renderer: Renderer2) {}
+
+  ngOnInit() {
+    // Inicializar el video con volumen 0 (muted)
+    setTimeout(() => {
+      if (this.videoPlayer) {
+        this.videoPlayer.nativeElement.volume = 0;
+        this.videoPlayer.nativeElement.muted = true;
+      }
+    }, 100);
+  }
+
+  toggleMute() {
+    if (this.videoPlayer) {
+      this.isMuted = !this.isMuted;
+      this.videoPlayer.nativeElement.muted = this.isMuted;
+      
+      if (!this.isMuted && this.volume === 0) {
+        this.volume = 50;
+        this.videoPlayer.nativeElement.volume = this.volume / 100;
+      }
+    }
+  }
+
+  onVolumeChange(event: any) {
+    this.volume = event.target.value;
+    if (this.videoPlayer) {
+      this.videoPlayer.nativeElement.volume = this.volume / 100;
+      this.isMuted = this.volume === 0;
+      this.videoPlayer.nativeElement.muted = this.isMuted;
+    }
+  }
+
+  subirVolumen() {
+    if (this.videoPlayer) {
+      this.volume = Math.min(100, this.volume + 10);
+      this.videoPlayer.nativeElement.volume = this.volume / 100;
+      this.isMuted = false;
+      this.videoPlayer.nativeElement.muted = false;
+    }
+  }
+
+  bajarVolumen() {
+    if (this.videoPlayer) {
+      this.volume = Math.max(0, this.volume - 10);
+      this.videoPlayer.nativeElement.volume = this.volume / 100;
+      this.isMuted = this.volume === 0;
+      this.videoPlayer.nativeElement.muted = this.isMuted;
+    }
+  }
+
+  onVolumeBarClick(event: MouseEvent) {
+    this.isDragging = true;
+    this.updateVolumeFromEvent(event);
+  }
+
+  onVolumeBarDrag(event: MouseEvent) {
+    if (this.isDragging) {
+      this.updateVolumeFromEvent(event);
+    }
+  }
+
+  onVolumeBarRelease() {
+    this.isDragging = false;
+  }
+
+  private updateVolumeFromEvent(event: MouseEvent) {
+    const volumeBar = event.currentTarget as HTMLElement;
+    const rect = volumeBar.getBoundingClientRect();
+    const width = rect.width;
+    const clickX = event.clientX - rect.left;
+    
+    // Calcular el porcentaje (de izquierda a derecha)
+    const percentage = Math.max(0, Math.min(100, (clickX / width) * 100));
+    
+    this.volume = Math.round(percentage);
+    
+    if (this.videoPlayer) {
+      this.videoPlayer.nativeElement.volume = this.volume / 100;
+      this.isMuted = this.volume === 0;
+      this.videoPlayer.nativeElement.muted = this.isMuted;
+    }
+  }
 
   toggleFijarMenu() {
     this.menuFijo = !this.menuFijo;

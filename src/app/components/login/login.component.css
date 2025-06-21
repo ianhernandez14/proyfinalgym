@@ -83,10 +83,15 @@ button[type="submit"]:disabled {
 .toggle-mode button {
   background: none;
   border: none;
-  color: #4285f4;
+  color: #1a73e8;
   cursor: pointer;
   font-size: 0.9rem;
   text-decoration: underline;
+  font-weight: 500;
+}
+
+.toggle-mode button:hover {
+  color: #0d47a1;
 }
 
 .error-message {

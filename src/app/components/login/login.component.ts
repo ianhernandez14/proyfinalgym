@@ -100,4 +100,8 @@ onCaptchaResolved(token: string) {
   onCaptchaExpired() {
     this.recaptchaToken = null;
   }
+
+  goToRegistro() {
+    this.router.navigate(['/registro']);
+  }
 }

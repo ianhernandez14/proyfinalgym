@@ -10,6 +10,7 @@ interface User {
   email: string;
   password: string;
   nombre_completo: string;
+  telefono: string;
   tipo_usuario: string;
 }
 
@@ -36,6 +37,31 @@ export class AuthService
         return null;
       }),
       catchError(() => of(null))
+    );
+  }
+
+  register(userData: { nombre_completo: string; email: string; telefono: string; password: string }): Observable<User | null> {
+    // Enviar solo los campos esenciales sin ID
+    const userDataToSend = {
+      email: userData.email,
+      password: userData.password,
+      nombre_completo: userData.nombre_completo,
+      telefono: userData.telefono,
+      tipo_usuario: 'usuario'
+    };
+
+    console.log('Datos a enviar al backend:', userDataToSend);
+
+    return this.http.post<User>(this.apiUrl, userDataToSend).pipe(
+      map(user => {
+        console.log('Usuario registrado exitosamente:', user);
+        return user;
+      }),
+      catchError(error => {
+        console.error('Error al registrar usuario:', error);
+        console.error('Detalles del error:', error.error);
+        return of(null);
+      })
     );
   }
 
