@@ -4,9 +4,10 @@ const router = express.Router();
 const datosController = require('../controllers/usuariosController');
 const mensajesController = require('../controllers/mensajesController');
 const inscripcionesController = require('../controllers/inscripcionesController');
+const { validarUsuario } = require('../validations/datosValidation');
 
 // Rutas para usuarios
-router.post('/usuarios', datosController.crearUsuario);
+router.post('/usuarios', validarUsuario, datosController.crearUsuario);
 router.get('/usuarios', datosController.obtenerUsuarios);
 router.get('/usuarios/:id', datosController.obtenerUsuarioPorId);
 router.put('/usuarios/:id', datosController.actualizarUsuario);

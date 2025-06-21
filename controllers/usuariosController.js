@@ -4,8 +4,8 @@ const UsuariosModel = require('../models/usuariosModel');
 exports.crearUsuario = async (req, res) => {
   try {
     const usuario = req.body;
-    if (!usuario.id || !usuario.email || !usuario.nombre_completo || !usuario.password || !usuario.tipo_usuario) {
-      return res.status(400).json({ mensaje: 'Faltan campos obligatorios.' });
+    if (!usuario.email || !usuario.nombre_completo || !usuario.password || !usuario.tipo_usuario) {
+      return res.status(400).json({ mensaje: 'Faltan campos obligatorios: email, nombre_completo, password, tipo_usuario.' });
     }
     const nuevoUsuario = await UsuariosModel.crear(usuario);
     res.status(201).json(nuevoUsuario);
