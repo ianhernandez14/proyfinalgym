@@ -4,6 +4,7 @@ const router = express.Router();
 const datosController = require('../controllers/usuariosController');
 const mensajesController = require('../controllers/mensajesController');
 const inscripcionesController = require('../controllers/inscripcionesController');
+const correoController = require('../controllers/correoController');
 const { validarUsuario } = require('../validations/datosValidation');
 
 // Rutas para usuarios
@@ -26,5 +27,8 @@ router.get('/inscripciones', inscripcionesController.obtenerTodas);
 router.get('/inscripciones/:id', inscripcionesController.obtenerUna);
 router.put('/inscripciones/:id', inscripcionesController.actualizar);
 router.delete('/inscripciones/:id', inscripcionesController.eliminar);
+
+//Ruta para enviar correo
+router.post('/enviar-correo', correoController.enviarCorreo);
 
 module.exports = router;
