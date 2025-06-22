@@ -168,7 +168,14 @@
       }
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="horarioForm.invalid">Enviar</button>
+   <button type="submit" class="btn btn-primary" [disabled]="horarioForm.invalid || loading">
+  @if (loading) {
+    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+    Enviando...
+  } @else {
+    Enviar
+  }
+</button>
 
    @if (mostrarAlerta) {
   <div class="alert alert-success mt-3 animate__animated animate__fadeIn text-light" role="alert">
@@ -176,6 +183,20 @@
   </div>
 }
   </form>
+   @if (formEnviado && resumenInscripcion) {
+  <div class="mt-5 p-4 rounded bg-light text-dark border border-success shadow-sm">
+    <h3 class="text-success mb-4"> Inscripción confirmada</h3>
+    <p class="text-success mb-4" > Datos Obtenidos</p>
+    <p><strong>Nombre:</strong> {{ resumenInscripcion.fullName | uppercase }}</p>
+    <p><strong>Correo electrónico:</strong> {{ resumenInscripcion.email | lowercase }}</p>
+    <p><strong>Teléfono:</strong> {{ resumenInscripcion.phone }}</p>
+    <p><strong>Fecha seleccionada:</strong> {{ resumenInscripcion.dob | date:'fullDate' }}</p>
+    <p><strong>Actividad:</strong> {{ resumenInscripcion.activity | titlecase }}</p>
+    <p><strong>Horario preferido:</strong> {{ resumenInscripcion.preferredTime || 'No especificado' }}</p>
+    <p><strong>Número de personas:</strong> {{ resumenInscripcion.peopleCount }}</p>
+    <p><strong>Comentarios:</strong> {{ resumenInscripcion.comments || 'Ninguno' }}</p>
+  </div>
+}
   } <!--if estaLogueado-->
 </section>
 

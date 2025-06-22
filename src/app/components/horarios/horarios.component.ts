@@ -6,7 +6,8 @@ import { ActividadCardComponent } from '../actividad-card/actividad-card.compone
 
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import { InscripcionService } from '../../services/inscripcion.service';
-import { Inscripcion } from '../../models/inscripcionModel';
+import { CorreoService } from '../../services/correo.service';
+import { Inscripcion } from '../../models/inscripcionModel';  
 
 @Component({
   selector: 'app-horarios',
@@ -25,6 +26,8 @@ export class HorariosComponent {
   currentUser: any = null;
   esAdmin: boolean = false;
   estaLogueado: boolean = false;
+  resumenInscripcion: any = null;
+  loading: boolean = false;
 
 
   actividades = [
@@ -38,7 +41,8 @@ export class HorariosComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private inscripcionService: InscripcionService
+    private inscripcionService: InscripcionService,
+    private correoService: CorreoService
   ){}
 
   ngOnInit() {
@@ -159,9 +163,28 @@ editarInscripcion(inscripcion: any): void {
 
 
   onSubmit(): void {
+this.loading = true;
+ this.resumenInscripcion = { ...this.horarioForm.value };
+
     if (this.horarioForm.invalid) {
       return;
     }
+   
+
+    const formData = this.horarioForm.value;
+
+  this.correoService.enviarCorreo({
+    email: formData.email,
+    fullName: formData.fullName
+  }).subscribe({
+    next: res => {
+      console.log('Correo enviado');
+    },
+    error: err => {
+      console.error('Error al enviar correo', err);
+    }
+  });
+
   
 
   
@@ -182,12 +205,14 @@ editarInscripcion(inscripcion: any): void {
       this.cargarInscripcionesUsuario();
       this.editandoId=null;
       this.horarioForm.reset();
+       location.reload();
     },error=>error.console(error));
   } else {
     this.inscripcionService.crear(inscripcion).subscribe(()=>{
       this.snackBar.open('¡Inscripción Creada!','Cerrar',{duration:2500});
       this.cargarInscripcionesUsuario();
       this.horarioForm.reset();
+      location.reload();
     },error=>console.error(error));
   
   }
