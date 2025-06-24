@@ -26,9 +26,9 @@ export class RegistroComponent implements OnInit {
   constructor(private router: Router, private ngZone: NgZone, private authService: AuthService) {}
 
   ngOnInit() {
-    // Asignamos las funciones globales para que reCAPTCHA las llame y Angular pueda detectarlas
+    //Asignamos las funciones globales para que reCAPTCHA las llame y Angular pueda detectarlas
     (window as any).onCaptchaResolved = (token: string) => {
-      // Para ejecutar dentro de Angular zone y actualizar variables reactivamente
+      //Para ejecutar dentro de Angular zone y actualizar variables reactivamente
       this.ngZone.run(() => {
         this.recaptchaToken = token;
         this.errorMessage = '';
@@ -102,7 +102,7 @@ export class RegistroComponent implements OnInit {
   }
 
   isValidPhone(phone: string): boolean {
-    // Validar teléfono mexicano: 10 dígitos
+    //Validar teléfono mexicano: 10 dígitos
     const phoneRegex = /^\d{10}$/;
     return phoneRegex.test(phone.replace(/\s/g, ''));
   }
@@ -110,15 +110,15 @@ export class RegistroComponent implements OnInit {
   onNumeroTelefonoInput(event: any) {
     let value = event.target.value;
     
-    // Solo permitir números y espacios
+    //Solo permitir números y espacios
     value = value.replace(/[^0-9\s]/g, '');
     
-    // Limitar a 12 caracteres (incluyendo espacios)
+    //Limitar a 12 caracteres (incluyendo espacios)
     if (value.length > 12) {
       value = value.substring(0, 12);
     }
     
-    // Formatear automáticamente: XX XXXX XXXX
+    //Formatear automáticamente: XX XXXX XXXX
     let cleanNumber = value.replace(/\s/g, '');
     if (cleanNumber.length >= 6) {
       value = `${cleanNumber.substring(0, 2)} ${cleanNumber.substring(2, 6)} ${cleanNumber.substring(6, 10)}`;
@@ -136,7 +136,7 @@ export class RegistroComponent implements OnInit {
       return;
     }
 
-    // Usar el servicio de autenticación para registrar el usuario
+    //Usar el servicio de autenticación para registrar el usuario
     this.authService.register({
       nombre_completo: this.nombreCompleto,
       email: this.email,
@@ -145,11 +145,11 @@ export class RegistroComponent implements OnInit {
     }).subscribe({
       next: (user) => {
         if (user) {
-          // Registro exitoso
+          //Registro exitoso
           console.log('Usuario registrado exitosamente:', user);
           this.showSuccessMessage = true;
 
-          // Limpiar formulario
+          //Limpiar formulario
           this.nombreCompleto = '';
           this.email = '';
           this.numeroTelefono = '';
@@ -157,13 +157,13 @@ export class RegistroComponent implements OnInit {
           this.confirmPassword = '';
           this.resetRecaptcha();
 
-          // Redirigir al login después de 3 segundos
+          //Redirigir al login después de 3 segundos
           setTimeout(() => {
             this.showSuccessMessage = false;
             this.router.navigate(['/login']);
           }, 3000);
         } else {
-          // Error en el registro
+          //Error en el registro
           this.errorMessage = 'Error al registrar el usuario. Por favor, inténtalo de nuevo.';
           this.resetRecaptcha();
         }
@@ -214,7 +214,7 @@ export class RegistroComponent implements OnInit {
     this.recaptchaToken = null;
   }
 
-  // Método para obtener el teléfono completo
+  //Método para obtener el teléfono completo
   getTelefonoCompleto(): string {
     return `${this.codigoPais} ${this.numeroTelefono}`;
   }

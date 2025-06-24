@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private ngZone:NgZone) {}
 
   ngOnInit() {
-    // Asignamos las funciones globales para que reCAPTCHA las llame y Angular pueda detectarlas
+    //Asignamos las funciones globales para que reCAPTCHA las llame y Angular pueda detectarlas
     (window as any).onCaptchaResolved = (token: string) => {
-      // Para ejecutar dentro de Angular zone y actualizar variables reactivamente
+      //Para ejecutar dentro de Angular zone y actualizar variables reactivamente
       this.ngZone.run(() => {
         this.recaptchaToken = token;
         this.errorMessage = '';
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // Sigue con tu lógica normal
+    //Sigue con tu lógica normal
     this.authService.login(this.email, this.password).subscribe((user: User | null) => {
       if (user) {
         this.welcomeName = user.nombre_completo;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.errorMessage = 'Usuario o contraseña incorrectos';
         this.showWelcomeMessage = false;
-        // También limpia el reCAPTCHA para que el usuario lo resuelva de nuevo
+        //También limpia el reCAPTCHA para que el usuario lo resuelva de nuevo
         this.resetRecaptcha();
       }
     });

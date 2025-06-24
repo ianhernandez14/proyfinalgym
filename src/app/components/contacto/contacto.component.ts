@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,7 +9,7 @@ import { Mensaje } from '../../services/contacto.service';
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule],
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.css']
 })
@@ -72,7 +70,7 @@ export class ContactoComponent{
   ngOnInit(): void
   {
     this.currentUser = this.authService.getCurrentUser();
-    // Verificar si hay usuario en localStorage
+    //Verificar si hay usuario en localStorage
     const userInStorage = localStorage.getItem('currentUser');
     this.estaLogueado = !!userInStorage && !!this.currentUser;
 

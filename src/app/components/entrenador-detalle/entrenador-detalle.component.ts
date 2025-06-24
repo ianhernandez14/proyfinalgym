@@ -13,6 +13,6 @@ export class EntrenadorDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    // Aquí puedes usar el id para buscar el entrenador en tu API o servicio
+    //Aquí puedes usar el id para buscar el entrenador en tu API o servicio
   }
 }

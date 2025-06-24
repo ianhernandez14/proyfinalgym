@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-// Define la interfaz User (asegúrate de tenerla en tu proyecto)
+//Define la interfaz User (asegúrate de tenerla en tu proyecto)
 interface User {
   id?: string;
   email: string;
@@ -41,7 +41,7 @@ export class AuthService
   }
 
   register(userData: { nombre_completo: string; email: string; telefono: string; password: string }): Observable<User | null> {
-    // Enviar solo los campos esenciales sin ID
+    //Enviar solo los campos esenciales sin ID
     const userDataToSend = {
       email: userData.email,
       password: userData.password,

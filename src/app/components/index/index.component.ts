@@ -1,5 +1,6 @@
 import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index',
@@ -14,8 +15,17 @@ export class IndexComponent implements OnInit {
   menuFijo = false;
   private lectorActivo = false;
   private mensaje: SpeechSynthesisUtterance | null = null;
+
+  //Almacena el evento de instalación cuando es compatible (Android/Chrome)
+  deferredPrompt: any = null;
+
+  //Controla si se debe mostrar el botón de instalación
+  showInstallButton: boolean = false;
+
+  //Detecta si es un dispositivo iOS
+  esIOS: boolean = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
   
-  // Propiedades para control de volumen
+  //Propiedades para control de volumen
   isMuted = true;
   volume = 50;
   showVolumeControls = false;
@@ -25,13 +35,89 @@ export class IndexComponent implements OnInit {
   constructor(private renderer: Renderer2) {}
 
   ngOnInit() {
-    // Inicializar el video con volumen 0 (muted)
+    //Inicializar el video con volumen 0 
     setTimeout(() => {
       if (this.videoPlayer) {
         this.videoPlayer.nativeElement.volume = 0;
         this.videoPlayer.nativeElement.muted = true;
       }
-    }, 100);
+    }, 1);
+
+this.showInstallButton = true;
+     console.log('¿es iOS?', this.esIOS);
+
+    //Caso Android: se lanza el evento beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.deferredPrompt = e;
+      this.showInstallButton = true;
+      console.log('Evento beforeinstallprompt capturado');
+      alert('Evento beforeinstallprompt capturado'); //para confirmarlo
+    });
+
+
+    //Caso iOS
+    if (this.esIOS)
+    {
+      this.showInstallButton = true;
+    }
+  }
+
+   instalarPWA(): void
+  {
+    console.log('Botón de instalar presionado');
+    console.log(this.deferredPrompt);
+
+    //Caso Android con deferredPrompt disponible
+    if (this.deferredPrompt)
+    {
+      Swal.fire({
+        title: '¿Instalar aplicación?',
+        text: '¿Quieres agregar esta app a tu pantalla de inicio?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, instalar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) =>
+      {
+        if (result.isConfirmed)
+        {
+          //Lanza el prompt oficial del navegador
+          this.deferredPrompt.prompt();
+
+          //Espera la respuesta del usuario
+          this.deferredPrompt.userChoice.then((choiceResult: any) =>
+          {
+            if (choiceResult.outcome === 'accepted')
+            {
+              console.log('App instalada');
+            }
+            else
+            {
+              console.log('App no instalada');
+            }
+
+            //Limpia el evento
+            this.deferredPrompt = null;
+            this.showInstallButton = false;
+          });
+        }
+      });
+    }
+
+    //Caso iOS
+    else if (this.esIOS)
+    {
+      Swal.fire({
+        title: '¿Agregar a pantalla de inicio?',
+        html: `
+          <p>Para instalar esta app, toca el botón <b>Compartir</b> en Safari y selecciona <b>"Agregar a pantalla de inicio"</b>.</p>
+          <img src="assets/icons/ios-share.png" alt="Instrucción iOS" style="width: 100px; margin-top: 10px;">
+        `,
+        icon: 'info',
+        confirmButtonText: 'Entendido'
+      });
+    }
   }
 
   toggleMute() {
@@ -94,7 +180,7 @@ export class IndexComponent implements OnInit {
     const width = rect.width;
     const clickX = event.clientX - rect.left;
     
-    // Calcular el porcentaje (de izquierda a derecha)
+    //Calcular el porcentaje (de izquierda a derecha)
     const percentage = Math.max(0, Math.min(100, (clickX / width) * 100));
     
     this.volume = Math.round(percentage);
@@ -111,7 +197,7 @@ export class IndexComponent implements OnInit {
   }
 
   activarLector() {
-    // Si ya está leyendo, cancelamos
+    //Si ya está leyendo, cancelamos
     if (window.speechSynthesis.speaking) {
       this.detenerLector();
       return;

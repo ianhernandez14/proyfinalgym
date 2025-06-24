@@ -24,7 +24,6 @@
       <video autoplay muted loop playsinline preload="auto" #videoPlayer>
         <source src="./videoInicio.mp4" type="video/mp4">
         <source src="./videoInicio.webm" type="video/webm">
-        Tu navegador no soporta el elemento video.
       </video>
       
       <!-- Controles de volumen estilo YouTube -->
@@ -49,7 +48,7 @@
       <div class="hero-text">
         <h1>GYM Exclusivo–</h1>
         <h1>El mejor GYM nunca antes visto</h1>
-        <p>Perfecto para cada actividad – Boxeo, Pesas, y explora lo que te gusta</p>
+        <h1>Perfecto para cada actividad -<br> Boxeo, Pesas, y explorar lo que te gusta</h1>
         <a [routerLink]="['/servicios']" class="btn">Ver Servicios</a>
       </div>
     </section>
@@ -123,10 +122,17 @@
       </button>
     </div>
 
-
+    <!-- Botón flotante para instalar la PWA -->
+    @if(showInstallButton)
+    {
+      <div class="pwa-install-btn" (click)="instalarPWA()" title="Instalar app en tu celular">
+        <img src="/icons/logo128x128.png" alt="Instalar App" style="width:40px;height:40px;">
+      </div>
+    }
     
-    <div class="accesibilidad-container" [class.activo]="menuFijo" (mouseenter)="!menuFijo && (menuFijo = false)"
-      (mouseleave)="!menuFijo && (menuFijo = false)">
+    <div class="accesibilidad-container" [class.activo]="menuFijo"
+     (mouseenter)="menuFijo = true"
+     (mouseleave)="menuFijo = false">
 
       <div class="accesibilidad-btn" (mouseenter)="!menuFijo && (menuFijo = true)" (click)="toggleFijarMenu()">
         <i class="bi bi-universal-access-circle"></i>
@@ -140,7 +146,6 @@
       </ul>
     </div>
   </div>
-
 
 </body>
 

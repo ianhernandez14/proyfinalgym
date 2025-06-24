@@ -261,7 +261,7 @@ textarea.form-control {
 /* Placeholder */
 .form-control::placeholder,
 .form-select option {
-  color: #a0a8c1 !important;
+  color: #000000 !important;
   /* gris azulado */
 }
 

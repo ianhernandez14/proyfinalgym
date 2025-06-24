@@ -125,8 +125,12 @@
 
     <div class="mb-3">
       <label for="activity" class="form-label">Actividad</label>
-      <select id="activity" formControlName="activity" class="form-select bg-light">
-        <option class="bg-light" value="">Selecciona una actividad</option>
+      <select
+        id="activity"
+        formControlName="activity"
+        class="form-select bg-light"
+        (change)="actualizarPrecio($event)">
+        <option class="bg-light" value="default">Selecciona una actividad</option>
         <option class="bg-light" value="boxeo">Boxeo</option>
         <option class="bg-light" value="mma">MMA</option>
         <option class="bg-light" value="zumba">Zumba</option>
@@ -143,19 +147,26 @@
       <input type="time" id="preferred-time" formControlName="preferredTime" class="form-control bg-light">
     </div>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="people-count" class="form-label">Número de personas</label>
       <input type="number" id="people-count" formControlName="peopleCount" min="1" max="10" class="form-control bg-light">
       @if (horarioForm.get('peopleCount')?.touched && horarioForm.get('peopleCount')?.invalid)
       {
         <div class="text-danger mt-1">Ingresa una cantidad válida (1-10).</div>
       }
-    </div>
+    </div> -->
 
     <div class="mb-3">
       <label for="comments" class="form-label">Comentarios adicionales</label>
       <textarea id="comments" formControlName="comments" class="form-control bg-light" rows="3"></textarea>
     </div>
+
+    <div class="mt-2 fs-4 my-4">
+      <strong>Precio a pagar: ${{ precioAPagar }}</strong>
+    </div>
+
+    if(current)
+    <div id="paypal-button-container"></div>
 
     <div class="form-check mb-3">
       <input type="checkbox" id="terms" formControlName="terms" class="form-check-input" required>
@@ -168,14 +179,15 @@
       }
     </div>
 
-   <button type="submit" class="btn btn-primary" [disabled]="horarioForm.invalid || loading">
-  @if (loading) {
-    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-    Enviando...
-  } @else {
-    Enviar
-  }
-</button>
+   <button type="submit" class="btn btn-primary"
+      [disabled]="horarioForm.invalid || loading || !pagoExitoso">
+      @if (loading) {
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Inscribiéndote...
+      } @else {
+        Inscribirse
+      }
+    </button>
 
    @if (mostrarAlerta) {
   <div class="alert alert-success mt-3 animate__animated animate__fadeIn text-light" role="alert">
@@ -193,18 +205,14 @@
     <p><strong>Fecha seleccionada:</strong> {{ resumenInscripcion.dob | date:'fullDate' }}</p>
     <p><strong>Actividad:</strong> {{ resumenInscripcion.activity | titlecase }}</p>
     <p><strong>Horario preferido:</strong> {{ resumenInscripcion.preferredTime || 'No especificado' }}</p>
-    <p><strong>Número de personas:</strong> {{ resumenInscripcion.peopleCount }}</p>
     <p><strong>Comentarios:</strong> {{ resumenInscripcion.comments || 'Ninguno' }}</p>
 
     <app-qr-inscripcion></app-qr-inscripcion>
 
   </div>
 }
-  } <!--if estaLogueado-->
+  } 
 </section>
-
-
-
 
 @if(esAdmin)
 {
@@ -212,7 +220,7 @@
     <section class="container mt-5">
       <div class="card shadow-lg border-0 bg-dark text-light">
         <div class="card-header bg-primary text-white">
-          <h2 class="mb-0 text-center">Tus inscripciones</h2>
+          <h2 class="mb-0 text-center">Inscripciones activas</h2>
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">

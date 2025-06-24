@@ -12,7 +12,7 @@ export class FirebaseService {
     return this.http.get<any[]>(`${this.apiUrl}/${nombreColeccion}`);
   }
 
-  // AGREGAR ESTE MÉTODO
+  //AGREGAR ESTE MÉTODO
   obtenerUltimoRegistro(nombreColeccion: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${nombreColeccion}/last`);
   }

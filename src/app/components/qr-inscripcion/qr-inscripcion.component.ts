@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { CommonModule } from '@angular/common';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-qr-inscripcion',
   standalone: true,
   templateUrl: './qr-inscripcion.component.html',
-  imports: [CommonModule, QRCodeModule],
+  imports: [CommonModule, QRCodeComponent],
 })
 export class QrInscripcionComponent implements OnInit {
   ultimaInscripcion: any = null;
@@ -51,7 +51,6 @@ export class QrInscripcionComponent implements OnInit {
   Fecha Seleccionada: ${i.dob || 'N/A'}
   Actividad: ${i.activity || 'N/A'}
   Horario: ${i.preferredTime || 'No especificado'}
-  Personas: ${i.peopleCount || 1}
   Comentarios: ${i.comments || 'Ninguno'}
   Fecha Inscripción: ${i.fechaInscripcion || new Date().toLocaleDateString()}
   ID: ${i.id || 'temp-id'}

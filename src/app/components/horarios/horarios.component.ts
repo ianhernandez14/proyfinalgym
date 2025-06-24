@@ -7,14 +7,13 @@ import { ActividadCardComponent } from '../actividad-card/actividad-card.compone
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import { InscripcionService } from '../../services/inscripcion.service';
 import { CorreoService } from '../../services/correo.service';
-import { Inscripcion } from '../../models/inscripcionModel';  
-import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 import { QrInscripcionComponent } from '../qr-inscripcion/qr-inscripcion.component';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-horarios',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ActividadCardComponent, MatSnackBarModule,QRCodeModule,QrInscripcionComponent],
+  imports: [CommonModule, ReactiveFormsModule, ActividadCardComponent, MatSnackBarModule,QrInscripcionComponent],
   templateUrl: './horarios.component.html',
   styleUrls: ['./horarios.component.css']
 })
@@ -30,7 +29,7 @@ export class HorariosComponent {
   estaLogueado: boolean = false;
   resumenInscripcion: any = null;
   loading: boolean = false;
-
+  pagoExitoso: boolean = false;
 
   actividades = [
     { imagen: 'boxeo.jpg', titulo: 'Boxeo', horario: 'De lunes a domingo: 5 pm - 10 pm' },
@@ -38,6 +37,15 @@ export class HorariosComponent {
     { imagen: 'zumba.jpg', titulo: 'Zumba', horario: 'De viernes a domingo: 7 am - 2 pm' },
     { imagen: 'pesas.jpg', titulo: 'Pesas', horario: 'Lunes a domingo: 6 am - 10 pm' }
   ];
+
+  precios: { [key: string]: number } = {
+    'boxeo': 299,
+    'mma': 299,
+    'zumba': 399,
+    'pesas': 399
+  };
+
+  precioAPagar: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -71,8 +79,66 @@ export class HorariosComponent {
       comments: [''],
       terms: [false, Validators.requiredTrue]
     });
+
+    if(this.currentUser)
+      this.renderizarBotonPaypal();
   }
 
+  renderizarBotonPaypal(): void
+  {
+    const waitForPaypal = setInterval(() =>
+      {
+        if ((window as any).paypal)
+        {
+          clearInterval(waitForPaypal);
+
+          (window as any).paypal.Buttons({
+            createOrder: (data: any, actions: any) =>
+            {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    value: this.precioAPagar
+                  },
+                  description: "Inscripción a actividad"
+                }]
+              });
+            },
+            onApprove: (data: any, actions: any) =>
+            {
+              return actions.order.capture().then((details: any) =>
+              {
+                this.pagoExitoso = true;
+              });
+            },
+            onCancel: () =>
+            {
+              Swal.fire({
+                icon: 'info',
+                title: 'Pago cancelado',
+                text: 'El pago ha sido cancelado por el usuario.'
+              });
+            },
+            onError: (err: any) =>
+            {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error en el pago',
+                text: 'Hubo un error al procesar el pago. Intenta nuevamente más tarde.'
+              });
+
+              console.error(err);
+            }
+          }).render('#paypal-button-container');
+        }
+      }, 100);
+  }
+
+  actualizarPrecio(event: any): void
+  {
+    const actividad = event.target.value;
+    this.precioAPagar = this.precios[actividad] || 0;
+  }
      
   fechaNoPasadaValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) {
@@ -83,7 +149,7 @@ export class HorariosComponent {
       const fechaSeleccionada = new Date(control.value);
       const hoy = new Date();
       
-      // Normalizamos las fechas para comparar solo día, mes y año
+      //Normalizamos las fechas para comparar solo día, mes y año
       const fechaSel = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), fechaSeleccionada.getDate());
       const fechaHoy = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
       
@@ -157,9 +223,9 @@ editarInscripcion(inscripcion: any): void {
     preferredTime: inscripcion.preferredTime,
     peopleCount: inscripcion.peopleCount,
     comments: inscripcion.comments,
-    terms: true // O como corresponda
+    terms: true //O como corresponda
   });
-  // Opcional: podrías guardar el id para actualizar en vez de crear uno nuevo al guardar
+  //Opcional: podrías guardar el id para actualizar en vez de crear uno nuevo al guardar
   this.editandoId = inscripcion.id;
 }
 
@@ -170,13 +236,12 @@ Teléfono: ${inscripcion.phone}
 Fecha seleccionada: ${inscripcion.dob}
 Actividad: ${inscripcion.activity}
 Horario preferido: ${inscripcion.preferredTime || 'No especificado'}
-Personas: ${inscripcion.peopleCount}
 Comentarios: ${inscripcion.comments || 'Ninguno'}`;
 }
 
-  onSubmit(): void {
-this.loading = true;
- this.resumenInscripcion = { ...this.horarioForm.value };
+onSubmit(): void {
+  this.loading = true;
+  this.resumenInscripcion = { ...this.horarioForm.value };
 
     if (this.horarioForm.invalid) {
       return;
@@ -226,6 +291,8 @@ this.loading = true;
   localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
 
   this.mostrarAlerta = true;
+  if(this.mostrarAlerta)
+    this.loading=false;
   this.formEnviado = true;
 
   this.snackBar.open('¡Inscripción enviada correctamente!', 'Cerrar', {
@@ -252,7 +319,7 @@ editandoId: number | null = null;
 
 
 onActividadSeleccionada(actividad: { imagen: string; titulo: string; horario: string }) {
-  // Normaliza el valor para que coincida con el select
+  //Normaliza el valor para que coincida con el select
   let value = '';
   switch (actividad.titulo.toLowerCase()) {
     case 'boxeo':

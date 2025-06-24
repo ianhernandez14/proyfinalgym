@@ -17,7 +17,7 @@
 
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       <div class="input-group">
-        <label>Usuario</label>
+        <label>Correo</label>
         <input type="text" [(ngModel)]="email" name="email" placeholder="Ingrese su correo" required>
       </div>
 
@@ -26,12 +26,9 @@
         <input type="password" [(ngModel)]="password" name="password" placeholder="Ingrese su contraseña" required>
       </div>
 
-      <!--aquí insertamos el reCAPTCHA-->
       <div class="recaptcha-wrapper">
         <div id="recaptcha"></div>
       </div>
-
-
 
       @if (errorMessage)
       {
@@ -45,7 +42,7 @@
       </button>
 
       <div class="toggle-mode">
-        <button type="button" (click)="goToRegistro()">¿No tienes cuenta? Regístrate</button>
+        <button type="button" class="text-dark fs-5" (click)="goToRegistro()">¿No tienes cuenta? Regístrate</button>
       </div>
     </form>
   </div>
