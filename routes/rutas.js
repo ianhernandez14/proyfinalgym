@@ -6,6 +6,7 @@ const mensajesController = require('../controllers/mensajesController');
 const inscripcionesController = require('../controllers/inscripcionesController');
 const correoController = require('../controllers/correoController');
 const { validarUsuario } = require('../validations/datosValidation');
+const firebaseController = require('../controllers/firebaseController');
 
 // Rutas para usuarios
 router.post('/usuarios', validarUsuario, datosController.crearUsuario);
@@ -30,5 +31,11 @@ router.delete('/inscripciones/:id', inscripcionesController.eliminar);
 
 //Ruta para enviar correo
 router.post('/enviar-correo', correoController.enviarCorreo);
+
+// Ruta para obtener todos los datos de Firebase
+router.get('/firebase/:collection', firebaseController.obtenerDatos);
+
+// Ruta para obtener el último registro
+router.get('/firebase/:collection/last', firebaseController.obtenerUltimoRegistro);
 
 module.exports = router;
