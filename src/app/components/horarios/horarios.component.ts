@@ -8,11 +8,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 import { InscripcionService } from '../../services/inscripcion.service';
 import { CorreoService } from '../../services/correo.service';
 import { Inscripcion } from '../../models/inscripcionModel';  
+import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
+import { QrInscripcionComponent } from '../qr-inscripcion/qr-inscripcion.component';
 
 @Component({
   selector: 'app-horarios',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ActividadCardComponent, MatSnackBarModule],
+  imports: [CommonModule, ReactiveFormsModule, ActividadCardComponent, MatSnackBarModule,QRCodeModule,QrInscripcionComponent],
   templateUrl: './horarios.component.html',
   styleUrls: ['./horarios.component.css']
 })
@@ -161,6 +163,16 @@ editarInscripcion(inscripcion: any): void {
   this.editandoId = inscripcion.id;
 }
 
+generarQR(inscripcion: any): string {
+  return `Nombre: ${inscripcion.fullName}
+Email: ${inscripcion.email}
+Teléfono: ${inscripcion.phone}
+Fecha seleccionada: ${inscripcion.dob}
+Actividad: ${inscripcion.activity}
+Horario preferido: ${inscripcion.preferredTime || 'No especificado'}
+Personas: ${inscripcion.peopleCount}
+Comentarios: ${inscripcion.comments || 'Ninguno'}`;
+}
 
   onSubmit(): void {
 this.loading = true;
@@ -169,7 +181,6 @@ this.loading = true;
     if (this.horarioForm.invalid) {
       return;
     }
-   
 
     const formData = this.horarioForm.value;
 
@@ -185,10 +196,6 @@ this.loading = true;
     }
   });
 
-  
-
-  
-  
   const inscripcion = {
       ...this.horarioForm.value,
       fechaInscripcion: new Date().toISOString(), 
@@ -212,7 +219,6 @@ this.loading = true;
       this.snackBar.open('¡Inscripción Creada!','Cerrar',{duration:2500});
       this.cargarInscripcionesUsuario();
       this.horarioForm.reset();
-      location.reload();
     },error=>console.error(error));
   
   }

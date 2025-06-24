@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@popperjs/core": "^2.11.8",
+    "angularx-qrcode": "^14.0.0",
     "bootstrap": "^5.3.5",
     "google-libphonenumber": "^3.2.42",
     "intl-tel-input": "^17.0.21",

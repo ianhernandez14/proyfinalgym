@@ -195,6 +195,9 @@
     <p><strong>Horario preferido:</strong> {{ resumenInscripcion.preferredTime || 'No especificado' }}</p>
     <p><strong>Número de personas:</strong> {{ resumenInscripcion.peopleCount }}</p>
     <p><strong>Comentarios:</strong> {{ resumenInscripcion.comments || 'Ninguno' }}</p>
+
+    <app-qr-inscripcion></app-qr-inscripcion>
+
   </div>
 }
   } <!--if estaLogueado-->

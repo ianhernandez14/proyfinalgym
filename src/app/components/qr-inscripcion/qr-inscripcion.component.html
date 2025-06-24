@@ -1,0 +1,39 @@
+<div class="qr-container">
+  <div *ngIf="loading" class="loading">
+    Cargando datos...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+    <button (click)="actualizarQR()" class="retry-btn">Reintentar</button>
+  </div>
+
+  <div *ngIf="ultimaInscripcion && !loading" class="qr-content">
+    <h3>Última Inscripción</h3>
+    
+    <div class="inscription-info">
+      <p><strong>Nombre:</strong> {{ ultimaInscripcion.fullName }}</p>
+      <p><strong>Email:</strong> {{ ultimaInscripcion.email }}</p>
+      <p><strong>Actividad:</strong> {{ ultimaInscripcion.activity }}</p>
+      <p><strong>Fecha:</strong> {{ ultimaInscripcion.fechaInscripcion }}</p>
+    </div>
+
+    <div class="qr-code">
+      <qrcode
+        [qrdata]="qrData"
+        [width]="256"
+        [errorCorrectionLevel]="'M'"
+        [elementType]="'canvas'"
+        [margin]="4">
+      </qrcode>
+    </div>
+
+    <button (click)="actualizarQR()" class="update-btn">
+      Actualizar QR
+    </button>
+  </div>
+
+  <div *ngIf="!ultimaInscripcion && !loading && !error" class="no-data">
+    No hay inscripciones disponibles
+  </div>
+</div>
