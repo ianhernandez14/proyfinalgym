@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class InscripcionService {
@@ -27,24 +26,8 @@ export class InscripcionService {
   }
 
 
-getInscripcionesPorActividad() {
-  return this.http.get<{ [actividad: string]: number }>('hhttps://proyfinalgym-back.onrender.com/api/inscripciones/grafica');
-}
-
-obtenerConteoPorActividad(): Observable<Record<string, number>> {
-  return this.http.get<any>('https://TU_PROYECTO.firebaseio.com/inscripciones.json').pipe(
-    map((res) => {
-      const conteo: Record<string, number> = {};
-      for (const key in res) {
-        const actividad = res[key].activity;
-        if (actividad) {
-          conteo[actividad] = (conteo[actividad] || 0) + 1;
-        }
-      }
-      return conteo;
-    })
-  );
-}
-
+  getInscripcionesPorActividad() {
+    return this.http.get<{ [actividad: string]: number }>('https://proyfinalgym-back.onrender.com/api/inscripciones/grafica');
+  }
   
 }
