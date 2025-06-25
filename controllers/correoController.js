@@ -7,7 +7,8 @@ exports.enviarCorreo = async (req, res) => {
     return res.status(400).json({ message: 'Faltan datos requeridos.' });
   }
 
-  try {
+  try
+  {
     const transporter = nodemailer.createTransport({
       service: 'outlook',
       auth: {
