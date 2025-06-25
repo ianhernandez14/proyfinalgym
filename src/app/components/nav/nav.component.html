@@ -10,6 +10,11 @@
     <li><a [routerLink]="['/servicios']" routerLinkActive="active">{{"servicios" | uppercase}}</a></li>
     <li><a [routerLink]="['/contacto']" routerLinkActive="active">{{"contacto" | uppercase}}</a></li>
     <li><a [routerLink]="['/horarios']" routerLinkActive="active">{{"horarios" | uppercase}}</a></li>
+    @if(esAdmin)
+    {
+      <li><a [routerLink]="['/estadisticas']" routerLinkActive="active">{{"estadisticas" | uppercase}}</a></li>
+    }
+    
   </ul>
 
   <div class="user-section">

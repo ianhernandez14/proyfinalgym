@@ -11,12 +11,15 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class NavComponent {
   logoPath: string = 'logo2.png'; 
+    esAdmin: boolean = false;
   currentUser: any = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
+   this.esAdmin = this.currentUser?.tipo_usuario === "admin";
+    console.log(this.esAdmin);
   }
 
   logout() {

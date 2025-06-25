@@ -1,6 +1,6 @@
 import { Routes , RouterModule} from '@angular/router';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
 import { EntrenadorDetalleComponent } from './components/entrenador-detalle/entrenador-detalle.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -8,6 +8,7 @@ import { IndexComponent } from './components/index/index.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { HorariosComponent } from './components/horarios/horarios.component';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 
 export const routes: Routes = [
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'servicios/:id', component: EntrenadorDetalleComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'horarios', component: HorariosComponent },
+  { path: 'estadisticas', component: EstadisticasComponent },
   { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: '**', redirectTo: '/index', pathMatch: 'full' }
 ];

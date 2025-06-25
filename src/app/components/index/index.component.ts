@@ -52,7 +52,6 @@ this.showInstallButton = true;
       this.deferredPrompt = e;
       this.showInstallButton = true;
       console.log('Evento beforeinstallprompt capturado');
-      alert('Evento beforeinstallprompt capturado'); //para confirmarlo
     });
 
 

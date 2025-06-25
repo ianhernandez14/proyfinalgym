@@ -23,6 +23,7 @@
     "@popperjs/core": "^2.11.8",
     "angularx-qrcode": "^19.0.0",
     "bootstrap": "^5.3.5",
+    "chart.js": "^4.5.0",
     "google-libphonenumber": "^3.2.42",
     "intl-tel-input": "^17.0.21",
     "libphonenumber-js": "^1.12.9",
