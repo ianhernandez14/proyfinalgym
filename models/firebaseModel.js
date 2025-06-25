@@ -1,4 +1,4 @@
-const { get } = require("../routes/rutas");
+//const { get } = require("../routes/rutas");
 const db = require("./conexion");
 
 //Función para obtener el último registro de una colección
