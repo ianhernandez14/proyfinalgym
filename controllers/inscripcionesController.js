@@ -1,6 +1,27 @@
 const InscripcionesModel = require("../models/inscripcionesModel");
+const db = require('../firebase');
 
 const inscripcionesController = {
+  async getInscripcionesPorActividad(req, res) {
+    try {
+     const snapshot = await db.collection('formularioInscripciones').get();
+
+      const conteo = {};
+
+      snapshot.forEach(doc => {
+        const actividad = doc.data().activity;
+        if (actividad) {
+          conteo[actividad] = (conteo[actividad] || 0) + 1;
+        }
+      });
+
+      res.json(conteo);
+    } catch (error) {
+      console.error('Error al obtener datos:', error);
+      res.status(500).json({ error: 'Error al obtener datos' });
+    }
+  },
+
   async crear(req, res) {
     try {
       const data = req.body;
