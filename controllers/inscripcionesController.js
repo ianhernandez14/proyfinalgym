@@ -1,5 +1,5 @@
 const InscripcionesModel = require("../models/inscripcionesModel");
-const db = require('../firebase');
+const db = require('../models/conexion');
 
 const inscripcionesController = {
   async getInscripcionesPorActividad(req, res) {

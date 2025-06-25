@@ -7,7 +7,7 @@ const estadisticasRoutes = require('./routes/estadisticas');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
+//Middlewares
 const corsOptions = {
   origin: 'https://proyfinalgym.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
@@ -16,7 +16,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Validación
+//Validación
 const manejarErroresValidacion = (req, res, next) => {
   const errores = validationResult(req);
   if (!errores.isEmpty()) {
@@ -29,16 +29,16 @@ const manejarErroresValidacion = (req, res, next) => {
 };
 app.use(manejarErroresValidacion);
 
-// Rutas
+//Rutas
 app.use('/api', rutas);
 app.use('/api/estadisticas', estadisticasRoutes);
 
-// Ruta de prueba
+//Ruta de prueba
 app.get('/', (req, res) => {
   res.send('API Firestore funcionando');
 });
 
-// Iniciar servidor
+//Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
