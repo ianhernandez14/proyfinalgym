@@ -11,8 +11,8 @@ exports.enviarCorreo = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'outlook',
       auth: {
-        user: 'al347589@edu.uaa.mx', // cambia esto
-        pass: 'Josimar3108' // cambia esto
+        user: 'al347589@edu.uaa.mx', //cambia esto
+        pass: 'Josimar3108' //cambia esto
       }
     });
 

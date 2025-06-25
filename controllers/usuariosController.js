@@ -1,6 +1,6 @@
 const UsuariosModel = require('../models/usuariosModel');
 
-// Crear usuario
+//Crear usuario
 exports.crearUsuario = async (req, res) => {
   try {
     const usuario = req.body;
@@ -14,7 +14,7 @@ exports.crearUsuario = async (req, res) => {
   }
 };
 
-// Obtener todos los usuarios
+//Obtener todos los usuarios
 exports.obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await UsuariosModel.obtenerTodos();
@@ -24,7 +24,7 @@ exports.obtenerUsuarios = async (req, res) => {
   }
 };
 
-// Obtener usuario por ID
+//Obtener usuario por ID
 exports.obtenerUsuarioPorId = async (req, res) => {
   try {
     const id = req.params.id;
@@ -38,7 +38,7 @@ exports.obtenerUsuarioPorId = async (req, res) => {
   }
 };
 
-// Actualizar usuario
+//Actualizar usuario
 exports.actualizarUsuario = async (req, res) => {
   try {
     const id = req.params.id;
@@ -50,7 +50,7 @@ exports.actualizarUsuario = async (req, res) => {
   }
 };
 
-// Eliminar usuario
+//Eliminar usuario
 exports.eliminarUsuario = async (req, res) => {
   try {
     const id = req.params.id;

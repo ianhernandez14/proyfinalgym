@@ -1,6 +1,6 @@
 const { getDataFromFirebase, getLastRecordFromFirebase } = require('../models/firebaseModel');
 
-// Controlador para obtener datos de Firebase
+//Controlador para obtener datos de Firebase
 const obtenerDatos = async (req, res) => {
   const { collection } = req.params;
   try {
@@ -12,7 +12,7 @@ const obtenerDatos = async (req, res) => {
   }
 };
 
-// Controlador para obtener el último registro
+//Controlador para obtener el último registro
 const obtenerUltimoRegistro = async (req, res) => {
   const { collection } = req.params;
   try {

@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-// URL del endpoint
+//URL del endpoint
 const url = 'http://localhost:3000/api/usuarios';
 
-// Datos de prueba para crear múltiples usuarios
+//Datos de prueba para crear múltiples usuarios
 const usuariosPrueba = [
   {
     email: "usuario1@example.com",
@@ -57,12 +57,12 @@ async function probarCrearUsuariosSecuenciales() {
       console.log('');
     }
     
-    // Pequeña pausa entre creaciones
+    //Pequeña pausa entre creaciones
     await new Promise(resolve => setTimeout(resolve, 500));
   }
   
   console.log('🎯 Prueba completada. Verifica en Firebase que los IDs sean: 1, 2, 3...');
 }
 
-// Ejecutar la prueba
+//Ejecutar la prueba
 probarCrearUsuariosSecuenciales(); 

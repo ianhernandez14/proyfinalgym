@@ -1,11 +1,10 @@
+require('dotenv').config(); //Cargar variables de entorno
+
 const admin = require('firebase-admin');
 
-const serviceAccount = require('../../proyfinalgym-firebase-adminsdk-fbsvc-f628cf0077.json');
-
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(require(process.env.GOOGLE_APPLICATION_CREDENTIALS))
 });
-
 
 const db = admin.firestore();
 

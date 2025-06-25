@@ -6,15 +6,15 @@ const UsuariosModel =
 {
   async obtenerSiguienteId()
   {
-    // Obtener todos los usuarios ordenados por ID descendente
+    //Obtener todos los usuarios ordenados por ID descendente
     const snapshot = await collection.orderBy('id', 'desc').limit(1).get();
     
     if (snapshot.empty) {
-      // Si no hay usuarios, empezar con ID 1
+      //Si no hay usuarios, empezar con ID 1
       return 1;
     }
     
-    // Obtener el ID más alto y sumar 1
+    //Obtener el ID más alto y sumar 1
     const ultimoUsuario = snapshot.docs[0].data();
     const ultimoId = parseInt(ultimoUsuario.id) || 0;
     return ultimoId + 1;
@@ -22,16 +22,16 @@ const UsuariosModel =
 
   async crear(usuario)
   {
-    // Generar ID secuencial
+    //Generar ID secuencial
     const id = await this.obtenerSiguienteId();
     
-    // Agregar el ID generado al objeto usuario
+    //Agregar el ID generado al objeto usuario
     const usuarioConId = {
       id: id,
       ...usuario
     };
     
-    // Guardar el documento usando el ID como documento ID en Firestore
+    //Guardar el documento usando el ID como documento ID en Firestore
     await collection.doc(String(id)).set(usuarioConId);
     return usuarioConId;
   },
