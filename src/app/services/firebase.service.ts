@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
-  private apiUrl = 'http://localhost:3000/api/firebase'; 
+  private apiUrl = 'https://proyfinalgym-back.onrender.com/api/firebase'; 
 
   constructor(private http: HttpClient) {}
 

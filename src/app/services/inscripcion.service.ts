@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Inscripcion } from '../models/inscripcionModel';
 
 @Injectable({ providedIn: 'root' })
 export class InscripcionService {
 
-  private API = 'http://localhost:3000/api/inscripciones';
+  private API = 'https://proyfinalgym-back.onrender.com/api/inscripciones';
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +28,7 @@ export class InscripcionService {
 
 
 getInscripcionesPorActividad() {
-  return this.http.get<{ [actividad: string]: number }>('http://localhost:3000/api/inscripciones/grafica');
+  return this.http.get<{ [actividad: string]: number }>('hhttps://proyfinalgym-back.onrender.com/api/inscripciones/grafica');
 }
 
 obtenerConteoPorActividad(): Observable<Record<string, number>> {

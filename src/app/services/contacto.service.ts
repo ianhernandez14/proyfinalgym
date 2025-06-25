@@ -15,7 +15,7 @@ export interface Mensaje {
   providedIn: 'root'
 })
 export class ContactoService {
-  private apiUrl = 'http://localhost:3000/api/mensajes'; 
+  private apiUrl = 'https://proyfinalgym-back.onrender.com/api/mensajes';
 
   constructor(private http: HttpClient) {}
 

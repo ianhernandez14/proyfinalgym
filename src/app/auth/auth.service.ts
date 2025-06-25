@@ -19,7 +19,7 @@ interface User {
 })
 export class AuthService
 {
-  private apiUrl = 'http://localhost:3000/api/usuarios';
+  private apiUrl = 'https://proyfinalgym-back.onrender.com/api/usuarios';
   private currentUser: User | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
