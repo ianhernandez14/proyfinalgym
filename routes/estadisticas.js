@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./models/conexion');
+const db = require('../models/conexion');
 
 router.get('/inscripciones-por-actividad', async (req, res) => {
   try {
