@@ -20,8 +20,13 @@ export class RegistroComponent implements OnInit {
   password: string = '';
   confirmPassword: string = '';
   errorMessage: string = '';
+  passwordError: string = '';
   showSuccessMessage: boolean = false;
   recaptchaToken: string | null = null;
+
+  // Constantes para validación de contraseña
+  readonly MIN_PASSWORD_LENGTH = 8;
+  readonly MAX_PASSWORD_LENGTH = 20;
 
   constructor(private router: Router, private ngZone: NgZone, private authService: AuthService) {}
 
@@ -41,6 +46,60 @@ export class RegistroComponent implements OnInit {
         this.errorMessage = 'El reCAPTCHA ha expirado, por favor vuelve a resolverlo.';
       });
     };
+  }
+
+  // Validación de contraseña en tiempo real
+  validatePassword(password: string): string {
+    if (!password) {
+      return '';
+    }
+
+    // Verificar longitud mínima y máxima
+    if (password.length < this.MIN_PASSWORD_LENGTH) {
+      return `La contraseña debe tener al menos ${this.MIN_PASSWORD_LENGTH} caracteres`;
+    }
+
+    if (password.length > this.MAX_PASSWORD_LENGTH) {
+      return `La contraseña no puede exceder ${this.MAX_PASSWORD_LENGTH} caracteres`;
+    }
+
+    // Verificar caracteres válidos (letras, dígitos y caracteres especiales)
+    const validCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/;
+    if (!validCharsRegex.test(password)) {
+      return 'La contraseña solo puede contener letras, números y caracteres especiales';
+    }
+
+    // Verificar que contenga al menos una mayúscula
+    const hasUpperCase = /[A-Z]/.test(password);
+    if (!hasUpperCase) {
+      return 'La contraseña debe contener al menos una letra mayúscula';
+    }
+
+    // Verificar que contenga al menos un dígito
+    const hasDigit = /\d/.test(password);
+    if (!hasDigit) {
+      return 'La contraseña debe contener al menos un número';
+    }
+
+    return '';
+  }
+
+  // Método para validar contraseña cuando cambia
+  onPasswordChange() {
+    this.passwordError = this.validatePassword(this.password);
+    // Limpiar error general si la contraseña es válida
+    if (!this.passwordError) {
+      this.errorMessage = '';
+    }
+  }
+
+  // Método para validar confirmación de contraseña
+  onConfirmPasswordChange() {
+    if (this.confirmPassword && this.password !== this.confirmPassword) {
+      this.errorMessage = 'Las contraseñas no coinciden. Por favor, verifica que ambas contraseñas sean iguales.';
+    } else if (this.confirmPassword && this.password === this.confirmPassword) {
+      this.errorMessage = '';
+    }
   }
 
   passwordsMatch(): boolean {
@@ -78,13 +137,20 @@ export class RegistroComponent implements OnInit {
       return false;
     }
 
-    if (this.password.length < 6) {
-      this.errorMessage = 'La contraseña debe tener al menos 6 caracteres';
+    // Validar contraseña con las nuevas reglas
+    const passwordValidation = this.validatePassword(this.password);
+    if (passwordValidation) {
+      this.errorMessage = passwordValidation;
+      return false;
+    }
+
+    if (!this.confirmPassword) {
+      this.errorMessage = 'Debe confirmar su contraseña';
       return false;
     }
 
     if (!this.passwordsMatch()) {
-      this.errorMessage = 'Las contraseñas no coinciden';
+      this.errorMessage = 'Las contraseñas no coinciden. Por favor, verifica que ambas contraseñas sean iguales.';
       return false;
     }
 
@@ -102,7 +168,7 @@ export class RegistroComponent implements OnInit {
   }
 
   isValidPhone(phone: string): boolean {
-    //Validar teléfono mexicano: 10 dígitos
+    //Validar teléfono: solo números, 10 dígitos
     const phoneRegex = /^\d{10}$/;
     return phoneRegex.test(phone.replace(/\s/g, ''));
   }
@@ -110,23 +176,31 @@ export class RegistroComponent implements OnInit {
   onNumeroTelefonoInput(event: any) {
     let value = event.target.value;
     
-    //Solo permitir números y espacios
-    value = value.replace(/[^0-9\s]/g, '');
+    //Solo permitir números
+    value = value.replace(/[^0-9]/g, '');
     
-    //Limitar a 12 caracteres (incluyendo espacios)
-    if (value.length > 12) {
-      value = value.substring(0, 12);
+    //Limitar a 10 dígitos
+    if (value.length > 10) {
+      value = value.substring(0, 10);
     }
     
     //Formatear automáticamente: XX XXXX XXXX
-    let cleanNumber = value.replace(/\s/g, '');
-    if (cleanNumber.length >= 6) {
-      value = `${cleanNumber.substring(0, 2)} ${cleanNumber.substring(2, 6)} ${cleanNumber.substring(6, 10)}`;
-    } else if (cleanNumber.length >= 2) {
-      value = `${cleanNumber.substring(0, 2)} ${cleanNumber.substring(2)}`;
+    if (value.length >= 6) {
+      value = `${value.substring(0, 2)} ${value.substring(2, 6)} ${value.substring(6, 10)}`;
+    } else if (value.length >= 2) {
+      value = `${value.substring(0, 2)} ${value.substring(2)}`;
     }
     
     this.numeroTelefono = value;
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    // Solo permitir números y teclas de control
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+    
+    if (!allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
   }
 
   onSubmit() {

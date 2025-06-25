@@ -44,19 +44,40 @@
           <input type="tel" [(ngModel)]="numeroTelefono" name="numeroTelefono" 
                  placeholder="55 1234 5678" 
                  maxlength="12" 
+                 pattern="[0-9\s]*"
                  (input)="onNumeroTelefonoInput($event)"
+                 (keypress)="onKeyPress($event)"
                  class="phone-number">
         </div>
       </div>
 
       <div class="input-group">
         <label>Contraseña</label>
-        <input type="password" [(ngModel)]="password" name="password" placeholder="Ingrese su contraseña" required>
+        <input type="password" 
+               [(ngModel)]="password" 
+               name="password" 
+               placeholder="Ingrese su contraseña" 
+               (input)="onPasswordChange()"
+               required>
+        @if (passwordError)
+        {
+        <div class="password-error-message">
+          {{ passwordError }}
+        </div>
+        }
+        <div class="password-requirements">
+          <small>La contraseña debe tener entre 8-20 caracteres, contener al menos una mayúscula, un número y puede usar letras, números y caracteres especiales</small>
+        </div>
       </div>
 
       <div class="input-group">
         <label>Confirmar Contraseña</label>
-        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirme su contraseña" required>
+        <input type="password" 
+               [(ngModel)]="confirmPassword" 
+               name="confirmPassword" 
+               placeholder="Confirme su contraseña" 
+               (input)="onConfirmPasswordChange()"
+               required>
       </div>
 
       <!--aquí insertamos el reCAPTCHA-->
@@ -71,7 +92,7 @@
       </div>
       }
 
-      <button type="submit" [disabled]="!registroForm.valid || !recaptchaToken || !passwordsMatch()">
+      <button type="submit" [disabled]="!registroForm.valid || !recaptchaToken || !passwordsMatch() || passwordError">
         Registrarse
       </button>
 
