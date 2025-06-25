@@ -20,9 +20,8 @@ const manejarErroresValidacion = (req, res, next) => {
 
 //Middlewares
 const corsOptions = {
-  origin: 'https://proyfinalgym-back.onrender.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://proyfinalgym.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
 
 app.use(cors(corsOptions));
